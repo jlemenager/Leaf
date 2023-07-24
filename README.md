@@ -30,7 +30,7 @@ Databases: PostgreSQL
 
 <strong>Check out our ERD:</strong>
 
-<img width="618" alt="Screenshot 2023-07-24 at 1 37 45 AM" src="https://github.com/jlemenager/Leaf/assets/131897602/c6087a81-a314-4257-8ad9-98fd8a6e0c0c">
+<img width="903" alt="Screenshot 2023-07-24 at 3 00 12 AM" src="https://github.com/jlemenager/Leaf/assets/131897602/9bd75dd6-b614-4a05-877f-77b40c4fbf3d">
 
 https://lucid.app/lucidchart/491135a8-a3b2-422f-a2e1-a432f1da573e/edit?beaconFlowId=431DE17EEF710B20&invitationId=inv_02b8ab10-863e-4fd6-82b6-f226caa88382&page=0_0#
 
