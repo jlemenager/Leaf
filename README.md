@@ -28,6 +28,12 @@ Databases: PostgreSQL
 
 <strong>Check out our design:</strong>
 
+Front Page:
+<img width="654" alt="Screenshot 2023-07-24 at 3 35 49 AM" src="https://github.com/jlemenager/Leaf/assets/131897602/3b3b008b-f606-4960-aa72-705b91b196ce">
+
+Dashboard Once Logged In:
+<img width="605" alt="Screenshot 2023-07-24 at 3 36 22 AM" src="https://github.com/jlemenager/Leaf/assets/131897602/67f0cf2c-fccf-45a7-b542-71a7aeeff102">
+
 <strong>Check out our ERD:</strong>
 
 <img width="903" alt="Screenshot 2023-07-24 at 3 00 12 AM" src="https://github.com/jlemenager/Leaf/assets/131897602/9bd75dd6-b614-4a05-877f-77b40c4fbf3d">
