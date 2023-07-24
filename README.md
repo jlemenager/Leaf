@@ -1,5 +1,7 @@
 # Leaf
 
+![Untitled design (18)](https://github.com/jlemenager/Leaf/assets/131897602/e5a0fd47-2ec7-468c-981a-bed7155761cc)
+
 Welcome to Leaf, the hub of automated consulting! Plug in your business information into our user experience and get a host of recommendations to grow your business (including specific strategies for you to do it ethically). Enter your various profit and loss records, income records, and your website and we will give you recommendations in four specific areas: 
 
 >digital marketing (improving Search Engine Optimization and social media strategy advice)
