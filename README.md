@@ -1,6 +1,6 @@
-# Leaf
-
 ![leaflogo2](https://github.com/jlemenager/Leaf/assets/131897602/22783cef-f217-4389-954c-87dfc0b08ec2)
+
+# Leaf
 
 Welcome to Leaf, the hub of automated consulting! Plug in your business information into our user experience and get a host of recommendations to grow your business (including specific strategies for you to do it ethically). Enter your various profit and loss records, income records, and your website and we will give you recommendations in four specific areas: 
 
