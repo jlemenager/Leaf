@@ -32,6 +32,12 @@ Databases: PostgreSQL
 
 https://lucid.app/lucidchart/491135a8-a3b2-422f-a2e1-a432f1da573e/edit?beaconFlowId=431DE17EEF710B20&invitationId=inv_02b8ab10-863e-4fd6-82b6-f226caa88382&page=0_0#
 
+<strong>And Our CHD Here:</strong>
+
+<img width="562" alt="Screenshot 2023-07-24 at 2 08 36 AM" src="https://github.com/jlemenager/Leaf/assets/131897602/47575459-dd63-4454-a232-655a2616794e">
+
+https://lucid.app/lucidchart/9e77d012-fb33-4bad-9926-7e08c9879616/edit?beaconFlowId=B1FB08E55E757E09&invitationId=inv_b2325b86-a5e9-4c57-b68c-57e7d32294f6&page=0_0#
+
 <strong>Trello Board:</strong>
 
 https://trello.com/b/doUPXMei/leaf
