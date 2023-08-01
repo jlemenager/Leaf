@@ -1,0 +1,306 @@
+#root {
+  margin:0;
+}
+
+body{
+  margin:0;
+  background-color: #F5F9FE;
+}
+
+/* Navbar */
+
+nav{
+  background-color: #418EEB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color:#F5F9FE;
+  padding: 0 30px;
+  box-shadow: 0 2px 8px #A0C6F5;
+}
+
+.nav-title-link{
+  text-decoration: none;
+  color:#F5F9FE;
+  }
+
+.nav-title{
+  display: flex;
+}
+
+.logo{
+  width:80px;
+  height:80px;
+}
+
+.nav-title-text{
+  font-size: 1.8rem;
+  margin-left:10px;
+}
+
+.link{
+  text-decoration: none;
+  color:#A0C6F5;
+  margin-left:40px;
+}
+
+/* Intro Page */
+
+.intro-page{
+background-color: #F5F9FE;
+}
+
+/* Hero Section */
+
+main{
+  /* background-image: url('https://images.pexels.com/photos/3599566/pexels-photo-3599566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); */
+  /* ('images/main-background.jpg'); */
+}
+
+.hero{
+  padding:200px 30px 50vh;
+}
+
+.hero-text{
+  color:#418EEB;
+}
+
+.hero-text-header{
+  font-size: 3rem;
+}
+
+.hero-text-subheader{
+  font-size: 2.2rem;
+  color:#A0C6F5;
+  margin-left:5px;
+}
+
+
+/* Footers */
+
+.footer-logo{
+  width:50px;
+}
+
+.footer-link{
+  color:#A0C6F5;
+  text-decoration: none;
+  margin-left: 40px;
+}
+
+/* Intro Footer */
+
+.intro-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 30px;
+  background-color: #418EEB;
+}
+
+/* Log in, Log out, Sign up */
+
+.user-account-change{
+  background-color: #A0C6F5;
+  margin: 120px 20vw 100px;
+  padding: 10px;
+  border-radius: 1.625rem;
+  color: #F5F9FE;
+  text-align: center;
+}
+
+.user-top{
+  margin-bottom: 50px;
+}
+
+.user-bridge-link{
+  text-decoration: none;
+  color: #418EEB;
+}
+
+.user-form-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  /* margin-left:20vw; */
+}
+
+.user-input{
+  width:30vw;
+  height: 50px;
+  border-radius: 1.625rem;
+  margin-left: 10px;
+  padding-left:20px;
+  border: #418EEB;
+  color:#418EEB;
+  font-size:1rem;
+}
+
+.user-input::placeholder{
+  color:#A0C6F5;
+}
+
+.user-submit-button{
+  margin: 20px 0;
+  padding: 20px 30px;
+  background-color: #418EEB;
+  border: none;
+  border-radius: 1.625rem;
+}
+.user-submit-link{
+  color: #F5F9FE;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/* User Nav */
+
+.user-nav-welcome{
+  color:#A0C6F5;
+}
+
+/* Dashboard */
+
+.dashboard{
+  margin:80px 30px 40px;
+}
+
+.dashboard-header{
+  color: #418EEB;
+  font-size: 3rem;
+  margin-bottom: 90px;
+}
+
+.dashboard-items{
+  display: grid;
+  grid-template-columns: 49% 49%;
+  gap: 2%;
+}
+
+.dashboard-item{
+  background-color: #A0C6F5;
+  color:#418EEB;
+  height:280px;
+  border-radius: 1.625rem;
+  margin-bottom:10px;
+}
+
+.dashboard-item-header{
+  margin-left:30px;
+}
+
+.dashboard-item-section-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:40px 30px 0;
+}
+
+.dashboard-item-section{
+  background-color: #418EEB;
+  color: #A0C6F5;
+  height:140px;
+  width:45%;
+  margin:10px 0 0 0;
+  padding-left: 15px;
+  border-radius: 1.625rem;
+}
+
+/* Spending */
+
+.spending-header{
+  color: #418EEB;
+  font-size: 3rem;  
+  margin:80px 30px 90px;
+}
+
+.tab-button{
+  width:25vw;
+  font-size:1.2rem;
+  background-color: #A0C6F5;
+  color: #F5F9FE;
+  border-radius: 1.625rem 1.625rem 0 0;
+  border: 3px solid #418EEB;
+  border-style: none solid none none;
+  padding:15px 0;
+}
+
+/* .tab1{
+  z-index: 1;
+}
+
+.tab2{
+  z-index: 0;
+} */
+.data{
+  margin:40px;
+}
+.data-inputs{
+  display: flex;
+  justify-content: space-around;
+  margin-top:90px;
+}
+
+.data-input-container{
+  background-color: #A0C6F5;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 1.625rem;
+}
+
+.data-input{
+  height:35px;
+  display: block;
+  width:520px;
+  border:2px solid #418EEB;
+  border-radius: 1.625rem;
+  padding-left: 15px;
+  color:#418EEB;
+}
+.data-input::placeholder{
+  color: #418EEB;
+}
+
+/* Marketing */
+
+.marketing-header{
+  color: #418EEB;
+  font-size: 3rem;  
+  margin:80px 30px 90px;
+}
+
+.marketing-tab{
+  width: 20vw;
+}
+
+.marketing-item{
+  background-color: #A0C6F5;
+  color:#418EEB;
+  height:320px;
+  border-radius: 1.625rem;
+  margin-bottom:10px;
+}
+.marketing-link{
+  text-decoration: none;
+}
+
+.marketing-item-header{
+  padding:30px 0 0 30px;
+}
+
+/* SEO */
+
+/* Social Media */
+
+.social-media-header{
+  color: #418EEB;
+  font-size: 3rem;  
+  margin:80px 30px 90px;
+}
+
+.social-media-input{
+  width:800px;
+}
+
+
