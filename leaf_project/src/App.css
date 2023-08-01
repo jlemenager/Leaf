@@ -226,16 +226,10 @@ main{
   padding:15px 0;
 }
 
-/* .tab1{
-  z-index: 1;
-}
-
-.tab2{
-  z-index: 0;
-} */
 .data{
   margin:40px;
 }
+
 .data-inputs{
   display: flex;
   justify-content: space-around;
@@ -301,6 +295,16 @@ main{
 
 .social-media-input{
   width:800px;
+}
+
+/* Charts */
+
+
+.displayed-data-container{
+  width:80vw;
+}
+#bar-chart{
+  width: 1000px;
 }
 
 

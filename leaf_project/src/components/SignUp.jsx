@@ -8,21 +8,11 @@ import UserContext from "../UserContext"
 export default function SignUp(){
     const { businessInfo, setBusinessInfo } = useContext(UserContext)
     const { Response, setResponse } = useContext(UserContext)
-    // const [nameFormState, setNameFormState] = useState('')
-    // const [usernameFormState, setUsernameFormState] = useState('')
-    // const [passwordFormState, setPasswordFormState] = useState('')
 
     const handleChange = (event) => {
         setBusinessInfo({...businessInfo, [event.target.id]: event.target.value, is_logged_in: true})
     }
 
-    // const usernameHandleChange = (event) => {
-    //     setUsernameFormState(event.target.value)
-    // }
-    // const passwordHandleChange = (event) => {
-    //     setPasswordFormState(event.target.value)
-    // }
-    
     const handleSubmit = async(e) => {
         e.preventDefault()
         const response = await axios.post('http://localhost:8000/business/', businessInfo)

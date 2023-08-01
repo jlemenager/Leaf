@@ -1,6 +1,9 @@
 import { useState, useContext, useEffect } from "react"
 import UserContext from "../UserContext"
 import axios from 'axios'
+import BarChart from "./BarChart"
+import LineChart from "./LineChart"
+import PieChart from "./PieChart"
 
 export default function Spending(){
 
@@ -18,7 +21,7 @@ export default function Spending(){
     let spendingInitialState = {
         business_id:businessInfo.id,
         business_name:businessInfo.business_name,
-        item:'',
+        item:'', 
         items_sold:'',
         cogs:'',
         total_shipping_expense:'',
@@ -35,22 +38,69 @@ export default function Spending(){
         number_of_error_free_freight_bills:'',
         gross_profit_from_item:''
     }
-    let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
+    // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [spendingInfo, setSpendingInfo] = useState(spendingInitialState)
+    let newSpendingInfoArray = []
+    let newSpendingInfoKeys = []
+
+    // Chart Data
+
+    const [spendingInfoArray, setSpendingInfoArray] = useState(Object.values(spendingInfo))
+    const [userData, setUserData] = useState({
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+        datasets: [
+            {
+                data: spendingInfoArray.map(data=>parseFloat(data)),
+                backgroundColor: [
+                    '#A0C6F5'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
 
     // onChange Input Functions
 
     const handleChange = (event) => {
-        console.log(businessInfo)
+        // console.log(businessInfo)
         setSpendingInfo({...spendingInfo, [event.target.id]: event.target.value})
-        console.log(spendingInfo)
+        // console.log(Object.values(spendingInfo))
+        setSpendingInfoArray(Object.values(spendingInfo))
+        console.log(spendingInfoArray)
+        
+        // for (let i = 0; i < spendingInfoArray.length; i++){
+        //     newSpendingInfoArray.push(parseFloat(spendingInfoArray[i]))
+        // }
     }
+
+    useEffect(()=>{
+        setUserData({
+            labels: newSpendingInfoKeys,
+            datasets: [
+                {
+                    data: newSpendingInfoArray.map(data=>parseFloat(data)),
+                    backgroundColor: [
+                        '#A0C6F5'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+    }, [])
 
     // On Submit
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        console.log(spendingInfo)
+        newSpendingInfoKeys = Object.keys(spendingInfo)
+        console.log(newSpendingInfoKeys)
+        newSpendingInfoKeys.splice(3,newSpendingInfoKeys.length-1)
+        console.log(newSpendingInfoKeys)
+        console.log(spendingInfoArray)
+        newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)
+        console.log(newSpendingInfoArray)
         if ((parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) > 1){
             setABCRating('C')
         } else if (0< (parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) < 1){
@@ -58,8 +108,6 @@ export default function Spending(){
         } else {
             setABCRating('A')
         }
-        
-
         const postSpendingData = async() => {
             try{
                 const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/spendingdata/`, spendingInfo)  
@@ -68,6 +116,7 @@ export default function Spending(){
             }
         }
         setTimeout(postSpendingData, 500)
+        // console.log(spendingInfoArray)
     }
 
     // Change Tabs
@@ -151,7 +200,7 @@ export default function Spending(){
     let EOQ = Math.sqrt((2*parseInt(spendingInfo.items_sold)*parseInt(spendingInfo.total_shipping_expense))/parseInt(spendingInfo.number_in_inventory))
     let CCC = (parseInt(spendingInfo.number_in_inventory) / parseInt(spendingInfo.cogs)) + (parseInt(spendingInfo.outstanding_payments_from_customers)/ parseInt(spendingInfo.revenue)) - (parseInt(spendingInfo.outstanding_payments_to_suppliers) / parseInt(spendingInfo.cogs))
     let DSI = parseInt(spendingInfo.number_in_inventory) / parseInt(spendingInfo.cogs)
-    console.log(inputDisplay)
+    // console.log(inputDisplay)
     let DPO = parseInt(spendingInfo.outstanding_payments_to_suppliers) / parseInt(spendingInfo.cogs)
     let DSO = parseInt(spendingInfo.outstanding_payments_from_customers)/ parseInt(spendingInfo.revenue)
     let ISR = parseInt(spendingInfo.number_in_inventory) / parseInt(spendingInfo.revenue)
@@ -272,7 +321,9 @@ export default function Spending(){
             >
                 <div className='displayed-data-container'>
                     <h1>Item: {spendingInfo?.item}</h1>
-                    <div className="displayed-data-left">
+                    <BarChart chartData={userData} className='bar-chart'/>
+
+                    {/* <div className="displayed-data-left">
                         <h4>Items Sold: {spendingInfo?.items_sold} {spendingInfo?.item}s</h4>
                         <h4>Total Shipping Expense: ${spendingInfo?.total_shipping_expense}</h4>
                         <h4>Number In Inventory: {spendingInfo?.number_in_inventory}</h4>
@@ -288,7 +339,7 @@ export default function Spending(){
                         <h4>Number of Freight Bills: {spendingInfo?.number_of_freight_bills}</h4>
                         <h4>Number of Error-Free Freight Bills: {spendingInfo?.number_of_error_free_freight_bills}</h4>
                         <h4>Gross Profit From Item: ${spendingInfo?.gross_profit_from_item}</h4>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="displayed-analysis" 
