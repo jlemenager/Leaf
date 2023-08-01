@@ -14,18 +14,18 @@ import SEO from "./SEO";
 import SocialMedia from './SocialMedia';
 
 export default function Main(){
-        const businessInitialState = {
-        business_name:'',
-        business_username:'',
-        business_password:'',
-        is_logged_in: true
-      }
+    //     const businessInitialState = {
+    //     business_name:'',
+    //     business_username:'',
+    //     business_password:'',
+    //     is_logged_in: true
+    //   }
     // 
     // console.log(businessInfoFromStorage)
     // 
      //thanks to help from chatGPT for this localStorage fix
-    // let businessInfoFromStorage = localStorage.getItem('businessInfo')
-    // let businessInitialState = businessInfoFromStorage ? JSON.parse(businessInfoFromStorage): {}
+    let businessInfoFromStorage = localStorage.getItem('businessInfo')
+    let businessInitialState = businessInfoFromStorage ? JSON.parse(businessInfoFromStorage): {}
     const [businessInfo, setBusinessInfo] = useState(businessInitialState)
 
     return(

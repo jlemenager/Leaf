@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom"
 import UserContext from "../UserContext"
 import { useState, useEffect, useContext } from 'react'
+import screenshot from '../images/website.png'
 import axios from 'axios'
-// import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-// import { Bar } from 'react-chartjs-2'
-
-// ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function Marketing(){
+    
+    // Variables
 
     const { businessInfo, setBusinessInfo } = useContext(UserContext)
     const [Response, setResponse] = useState(null)
-    // const [ABCRating, setABCRating] = useState(null)
-    // const [display, setDisplay] = useState('none')
     const [inputDisplay, setInputDisplay] = useState('none')
     const [dataDisplay, setDataDisplay] = useState('none')
     const [SEOAnalysisDisplay, setSEOAnalysisDisplay] = useState('none')
@@ -29,48 +26,30 @@ export default function Marketing(){
         // industry_rec: '',
         website: ''
     }
-
-    // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [marketingInfo, setMarketingInfo] = useState(marketingInitialState)
     const [url, setUrl] = useState('')
     const [info, setInfo] = useState('')
+    const [imagePath, setImagePath] = useState('https://images.pexels.com/photos/17463091/pexels-photo-17463091/free-photo-of-lightning-bolt-in-the-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
+    
+    // onChange Input Functions
+
     const handleChange = (event) => {
         console.log(businessInfo.id)
         setMarketingInfo({...marketingInfo, [event.target.id]: event.target.value})
-        // console.log(businessInfo.business_id)
-    //     const getBusinessInfo = async() => {
-    //         const response = await axios.get('http://localhost:8001/business/')
-    //         // setBusinessInfo({...businessInfo, business_id: response.data[response.data.length-1].id})
-    //         console.log(response.data)
-    //     }
-    //     getBusinessInfo()
     }
 
     const handleWebsiteChange = (event) => {
-        const handleChangeAPI = async() => {
-            setMarketingInfo({...marketingInfo, [event.target.id]: event.target.value})
-            setUrl(event.target.value)
-            console.log(url)
-            const response = await axios.put(`http://localhost:4000/getinfo`, url= url)
-        }
-        handleChangeAPI()
+        setMarketingInfo({...marketingInfo, [event.target.id]: event.target.value})
+        setUrl(event.target.value)
+        console.log(url)
     }
+
+    // Post Requests on Submit
 
     const handleSubmit = async(e) => {
         e.preventDefault()
         console.log(marketingInfo)
-        // sendWebsite(e)
-        // if ((parseInt(marketingInfo.items_sold) / parseInt(marketingInfo.revenue)) > 1){
-        //     setABCRating('C')
-        // } else if (0< (parseInt(marketingInfo.items_sold) / parseInt(marketingInfo.revenue)) < 1){
-        //     setABCRating('B')
-        // } else {
-        //     setABCRating('A')
-        // }
-        // setSpendingInfo({...spendingInfo, business_id: businessInfo.id})
-        // const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata`)
-        // let spendingInfoAsString = JSON.stringify(response.data)
-        // localStorage.setItem('spendingInfo', spendingInfoAsString)
+        
         const postMarketingData = async() => {
             try{
                 const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/marketingdata/`, marketingInfo)  
@@ -79,30 +58,19 @@ export default function Marketing(){
             }
         }
         setTimeout(postMarketingData, 500)
+
+        const getScrapedData = async() => {
+            const response = await axios.post(`http://localhost:4000/getinfo`, {url: url})
+            setInfo(JSON.stringify(response.data))
+            console.log('response', response)
+        }
+        getScrapedData()
+
+        setImagePath(screenshot)
     }
 
-    // const resetBusiness = () => {
-    //     const getBusinessInfo = async() => {
-    //         const response = await axios.get(`http://localhost:8000/business/`)
-    //             setBusinessInfo(response.data[response.data.length-1])
-    //             console.log(businessInfo)
-    //     }
-    //     getBusinessInfo()
-    // }
 
-    // useEffect(()=>{
-    //     getWebsite()
-    // },[])
-
-    // const sendWebsite = async(e) => {
-    //     e.preventDefault()
-    //     await axios.post('http://localhost:4000/getinfo', {url: url})
-    // }
-
-    // const getWebsite = async() => {
-    //     const response = await axios.get('http://localhost:4000/getinfo')
-    //     setInfo(response.data)
-    // }
+    // Changing Tabs
 
     const changeInputDisplay = (event) => {
         if(inputDisplay === 'none'){
@@ -285,15 +253,6 @@ export default function Marketing(){
         TotalRec = "[State Doesn't Exist]"
     }
 
-    // const marketingChart = new Chart('marketingChart', {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Target Age' , 'Percentage Female', 'Target State'],
-    //         datasets: [1,2,3]
-    //         // datasets: [marketingInfo.average_target_age, marketingInfo.percent_women, marketingInfo.target_state],
-    //     }
-    // })
-
     return (
         <div className="marketing">
             <h1 className="marketing-header">A Hub for All of Your Marketing Information</h1>
@@ -307,13 +266,11 @@ export default function Marketing(){
             <div className="data" 
             style={{display: inputDisplay}}
             >
-                {/* <button>Total Items</button>
-                <button>Add Items</button> */}
                 <div className="data-inputs">
                     <div className="data-input-column">
                         <h1>SEO Data</h1>
                         <div className="data-input-container">
-                            <input className='data-input' type="text" id="website" onChange={handleWebsiteChange} placeholder="Website URL"/>
+                            <input className='data-input' type="text" id="website"onChange={handleWebsiteChange} placeholder="Website URL"/>
                         </div>
                     </div>
                     <div className="data-input-column">
@@ -346,41 +303,22 @@ export default function Marketing(){
             >
                 <div className='displayed-data-container'>
                     <div className="displayed-data-left">
-                        {/* <Bar data={marketingInfo.average_target_age}/> */}
                         <h4>Website: {marketingInfo.website}</h4>
                         <h2>{info}</h2>
+                        <img src={imagePath} alt="" />
+                        <h1>poo</h1>
                     </div>
                     <div className="displayed-data-right">
-                        {/* <h4>Average Customer Age or Target Age: {marketingInfo.average_target_age}</h4>
-                        <h4>Percent Women Customers or Target Goal: {marketingInfo.percent_women}</h4>
-                        <h4>Average State Customer Lives in Or Custom State: {marketingInfo.target_state}</h4> */}
-                        {/* {marketingChart} */}
                     </div>
                 </div>
             </div>
             <div className="displayed-analysis" 
             style={{display: SEOAnalysisDisplay}}
             >
-                {/* <h4>Gross Margin Return on Investment: {GMROI}</h4> */}
                 <h4>SEO Analysis </h4>
-                {/* <h4>Cash Conversion Cycle: {CCC}</h4>
-                <h4>Days Sales of Inventory: {DSI}</h4>
-                <h4>Days Payable Outstanding: {DPO}</h4>
-                <h4>Days Sales Outstanding: {DSO}</h4>
-                <h4>Inventory Service Accuracy: {ISA}</h4>
-                <h4>ABC Analysis: {ABC} and is therefore a/an {ABCRating} item</h4>
-                <h4>Reorder Point: {ROP}</h4>
-                <h4>Freight Bill Accuracy: {FBA}</h4>  */}
             </div>
             <div className="displayed-recommendations" style={{display: SEORecommendationsDisplay}}>
                 <h1>SEO Recommendations</h1>
-                {/* <p>You should place an order every time you have {ROP} {spendingInfo.item}s left</p>
-                <p>You should order around {EOQ} items every time as that is your Economic Order Quantity</p>
-                <p>You should prioritize the quality of all of your A items</p>
-                <p>{DSIRec}</p>
-                <p>{DPORec}</p>
-                <p>{DSORec}</p>
-                <p>{FBARec}</p> */}
             </div>
             <div className="displayed-recommendations" style={{display: socialMediaRecommendationsDisplay}}>
                 <h1>Social Media Recommendations</h1>

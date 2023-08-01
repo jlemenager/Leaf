@@ -45,10 +45,10 @@ export default function LogIn(){
             }
         }
         // setBusinessInfo({...businessInfo, business_id: businessInfo.id})
-        // const businessInfoAsString = JSON.stringify(response.data)
-        // console.log(response.data)
-        // localStorage.setItem('businessInfo', businessInfoAsString)
-        // console.log(localStorage.getItem('businessInfo'))
+        const businessInfoAsString = JSON.stringify(response.data)
+        console.log(response.data)
+        localStorage.setItem('businessInfo', businessInfoAsString)
+        console.log(localStorage.getItem('businessInfo'))
         //thanks to help from chatGPT for this localStorage fix
         // console.log(response.data)
         // setBusinessInfo({...businessInfo, [id]: business_url.splice(31,34)})

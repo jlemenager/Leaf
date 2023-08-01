@@ -48,7 +48,7 @@ export default function Spending(){
         number_of_error_free_freight_bills:'',
         gross_profit_from_item:''
     }
-    // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
+    let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [spendingInfo, setSpendingInfo] = useState(spendingInitialState)
 
     const handleChange = (event) => {
@@ -61,6 +61,7 @@ export default function Spending(){
     //         console.log(response.data)
     //     }
     //     getBusinessInfo()
+        console.log(spendingInfo)
     }
 
     const handleSubmit = async(e) => {
@@ -75,10 +76,15 @@ export default function Spending(){
         }
 
         // setSpendingInfo({...spendingInfo, business_id: businessInfo.id})
-        // const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata`)
         
-        // let spendingInfoAsString = JSON.stringify(response.data)
-        // localStorage.setItem('spendingInfo', spendingInfoAsString)
+        
+        // const setSpendingAPI = async() => {
+        //     const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata`)
+        //     let spendingInfoAsString = JSON.stringify(response.data)
+        //     localStorage.setItem('spendingInfo', spendingInfoAsString)
+        // }
+        // setSpendingAPI()
+        
 
         const postSpendingData = async() => {
             try{
@@ -214,7 +220,7 @@ export default function Spending(){
         FBARec = 'Your Freight Bill Accuracy is great! Stay with your freight company, they are certainly not losing you money due to errors'
     }
     return (
-        <div className="spending" onLoad={resetBusinessInfo}>
+        <div className="spending">
             <h1 className="spending-header">A Hub for All of Your Spending Data</h1>
             <div className="tabs">
                 <button className="tab-button tab1" onClick={changeInputDisplay}>Data Inputs</button>
