@@ -6,8 +6,6 @@ export default function ESGMetrics(){
 
     const { businessInfo, setBusinessInfo } = useContext(UserContext)
     const [Response, setResponse] = useState(null)
-    // const [ABCRating, setABCRating] = useState(null)
-    // const [display, setDisplay] = useState('none')
     const [inputDisplay, setInputDisplay] = useState('none')
     const [dataDisplay, setDataDisplay] = useState('none')
     const [GHGAssessmentDisplay, setGHGAssessmentDisplay] = useState('none')
@@ -55,29 +53,11 @@ export default function ESGMetrics(){
     const handleChange = (event) => {
         console.log(businessInfo.id)
         setGHGAssessmentInfo({...ghgAssessmentInfo, [event.target.id]: event.target.value})
-        // console.log(businessInfo.business_id)
-    //     const getBusinessInfo = async() => {
-    //         const response = await axios.get('http://localhost:8001/business/')
-    //         // setBusinessInfo({...businessInfo, business_id: response.data[response.data.length-1].id})
-    //         console.log(response.data)
-    //     }
-    //     getBusinessInfo()
     }
 
     const handleSubmit = async(e) => {
         e.preventDefault()
         console.log(ghgAssessmentInfo)
-        // if ((parseInt(marketingInfo.items_sold) / parseInt(marketingInfo.revenue)) > 1){
-        //     setABCRating('C')
-        // } else if (0< (parseInt(marketingInfo.items_sold) / parseInt(marketingInfo.revenue)) < 1){
-        //     setABCRating('B')
-        // } else {
-        //     setABCRating('A')
-        // }
-        // setSpendingInfo({...spendingInfo, business_id: businessInfo.id})
-        // const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata`)
-        // let spendingInfoAsString = JSON.stringify(response.data)
-        // localStorage.setItem('spendingInfo', spendingInfoAsString)
         const postGHGAssessmentData = async() => {
             try{
                 const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/ghgassessmentdata/`, ghgAssessmentInfo)  
@@ -257,8 +237,6 @@ export default function ESGMetrics(){
             <div className="data" 
             style={{display: inputDisplay}}
             >
-                {/* <button>Total Items</button>
-                <button>Add Items</button> */}
                 <div className="data-inputs">
                     <div className="data-input-column">
                         <h1>Energy and Waste</h1>
@@ -400,7 +378,6 @@ export default function ESGMetrics(){
             <div className="displayed-analysis" 
             style={{display: GHGAssessmentDisplay}}
             >
-                {/* <h4>Gross Margin Return on Investment: {GMROI}</h4> */}
                 <h4>GHG Assessment </h4>
                 <h4>Total Pounds of CO2e Released from Electricity Used in Buildings and Factories: {ELECTRICITYCO2e}</h4>
                 <h4>Total Pounds of CO2e Released from Travel: {TRAVELCO2e}</h4>
@@ -430,13 +407,6 @@ export default function ESGMetrics(){
             </div>
             <div className="displayed-recommendations" style={{display: environmentalRecommendationsDisplay}}>
                 <h1>Environmental Recommendations</h1>
-                {/* <p>You should place an order every time you have {ROP} {spendingInfo.item}s left</p>
-                <p>You should order around {EOQ} items every time as that is your Economic Order Quantity</p>
-                <p>You should prioritize the quality of all of your A items</p>
-                <p>{DSIRec}</p>
-                <p>{DPORec}</p>
-                <p>{DSORec}</p>
-                <p>{FBARec}</p> */}
             </div>
             <div className="displayed-recommendations" style={{display: workerRecommendationsDisplay}}>
                 <h1>Ethical Sourcing and Labor Recommendations</h1>

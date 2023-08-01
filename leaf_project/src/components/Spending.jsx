@@ -4,6 +4,8 @@ import axios from 'axios'
 
 export default function Spending(){
 
+    // Variables
+
     const { businessInfo, setBusinessInfo } = useContext(UserContext)
     const [Response, setResponse] = useState(null)
     const [ABCRating, setABCRating] = useState(null)
@@ -12,21 +14,6 @@ export default function Spending(){
     const [dataDisplay, setDataDisplay] = useState('none')
     const [analysisDisplay, setAnalysisDisplay] = useState('none')
     const [recommendationsDisplay, setRecommendationsDisplay] = useState('none')
-    // let dataDisplay = {
-    //     display: 'none'
-    // }
-    // let analysisDisplay = {
-    //     display: 'none'
-    // }
-
-    const resetBusinessInfo = ()=>{
-        const getBusinessInfo = async() => {
-            const response = await axios.get(`http://localhost:8000/business/`)
-                setBusinessInfo(response.data[response.data.length-1])
-                console.log(businessInfo)
-        }
-        getBusinessInfo()
-    }
 
     let spendingInitialState = {
         business_id:businessInfo.id,
@@ -51,18 +38,15 @@ export default function Spending(){
     let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [spendingInfo, setSpendingInfo] = useState(spendingInitialState)
 
+    // onChange Input Functions
+
     const handleChange = (event) => {
         console.log(businessInfo)
         setSpendingInfo({...spendingInfo, [event.target.id]: event.target.value})
-        // console.log(businessInfo.business_id)
-    //     const getBusinessInfo = async() => {
-    //         const response = await axios.get('http://localhost:8001/business/')
-    //         // setBusinessInfo({...businessInfo, business_id: response.data[response.data.length-1].id})
-    //         console.log(response.data)
-    //     }
-    //     getBusinessInfo()
         console.log(spendingInfo)
     }
+
+    // On Submit
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -74,16 +58,6 @@ export default function Spending(){
         } else {
             setABCRating('A')
         }
-
-        // setSpendingInfo({...spendingInfo, business_id: businessInfo.id})
-        
-        
-        // const setSpendingAPI = async() => {
-        //     const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata`)
-        //     let spendingInfoAsString = JSON.stringify(response.data)
-        //     localStorage.setItem('spendingInfo', spendingInfoAsString)
-        // }
-        // setSpendingAPI()
         
 
         const postSpendingData = async() => {
@@ -95,6 +69,8 @@ export default function Spending(){
         }
         setTimeout(postSpendingData, 500)
     }
+
+    // Change Tabs
 
     const changeInputDisplay = (event) => {
         if(inputDisplay === 'none'){
