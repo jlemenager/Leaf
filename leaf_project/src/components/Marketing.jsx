@@ -98,16 +98,11 @@ export default function Marketing(){
         const getScrapedData = async() => {
             const response = await axios.post(`http://localhost:4000/getinfo`, {url: url})
             setInfo(JSON.stringify(response.data))
-            if(info.length >= 5){
+            if(info.length >= 5 && info.includes('Shop')){
                 setH1Count('Great job! You are using over 4 h1s!')
-            } else {
-                setH1Count('Try using more h1s!')
-            }
-            let includesAll = info.includes('Shop') || info.includes('shop') || info.includes('Buy') || info.includes('buy') || info.includes('Order') || info.includes('order') || info.includes('Create') || info.includes('create') || info.includes('Sign') || info.includes('sign') || info.includes('Log') || info.includes('log') || info.includes('Build') || info.includes('build')
-
-            if (includesAll){
                 setKeywordAnalysis("You used at least one action-oriented keyword in your h1s, creating a call to action! That should boost your user experience.")
             } else {
+                setH1Count('Try using more h1s!')
                 setKeywordAnalysis("You did not include a call to action word in any of your h1s.")
             }
             console.log('response', response)
