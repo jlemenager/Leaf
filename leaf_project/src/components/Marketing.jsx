@@ -350,7 +350,7 @@ export default function Marketing(){
                         <h2 className="SEO-analysis">All Front-Page H1s: <span className='h1-list'>{info}</span></h2>
                         <h2 className="SEO-analysis">{h1count}</h2>
                         <h2 className="SEO-analysis">{keywordAnalysis}</h2>
-                        <img src={imagePath} alt="" />
+                        {/* <img src={imagePath} alt="" /> */}
                     </div>
                     <div className="displayed-data-right">
                     </div>
