@@ -40,8 +40,9 @@ export default function Spending(){
     }
     // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [spendingInfo, setSpendingInfo] = useState(spendingInitialState)
-    let newSpendingInfoArray = []
-    let newSpendingInfoKeys = []
+    const [newSpendingInfoArray, setNewSpendingInfoArray] = useState([])
+    const [newSpendingInfoKeys, setNewSpendingInfoKeys] = useState([])
+    const [splicedKeys, setSplicedKeys] = useState([])
 
     // Chart Data
     const [renewedSpendingInfo, setRenewedSpendingInfo] = useState(null)
@@ -71,23 +72,27 @@ export default function Spending(){
         // }
     }
 
-    useEffect(()=> {
-        const getResponseAPI = async() => {
-            console.log(businessInfo)
-            console.log(spendingInfo)
-            const response = await axios.get('http://localhost:8000/spendingdata/')
-            setSpendingInfo(response.data.find(spendingData=>spendingData.business_id === businessInfo.id))
-        }
-        getResponseAPI()
-    }, [])
+    // useEffect(()=> {
+    //     const getResponseAPI = async() => {
+    //         console.log(businessInfo)
+    //         console.log(spendingInfo)
+    //         const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata/`)
+    //         setSpendingInfo(response.data[0])
+    //         newSpendingInfoKeys = Object.keys(spendingInfo)
+    //         splicedKeys = newSpendingInfoKeys.splice(-15)
+    //         newSpendingInfoKeys = Object.values(spendingInfo)
+    //         newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)
+    //     }
+    //     getResponseAPI()
+    // }, [])
 
     // On Submit
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        newSpendingInfoKeys = Object.keys(spendingInfo)
-        let splicedKeys = newSpendingInfoKeys.splice(-15)
-        newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)
+        setNewSpendingInfoKeys(Object.keys(spendingInfo))
+        setSplicedKeys(newSpendingInfoKeys.splice(-15))
+        setNewSpendingInfoArray(spendingInfoArray.splice(3,spendingInfoArray.length-1))
         if ((parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) > 1){
             setABCRating('C')
         } else if (0< (parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) < 1){
@@ -348,6 +353,7 @@ export default function Spending(){
             >
                 <div className='displayed-data-container'>
                     <h1>Item: {spendingInfo?.item}</h1>
+                    <p>{spendingInfo.items_sold}</p>
                     <BarChart chartData={userData} className='bar-chart'/>
 
                     {/* <div className="displayed-data-left">
