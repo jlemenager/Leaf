@@ -104,10 +104,12 @@ export default function Marketing(){
             } else {
                 setH1Count('Try using more h1s!')
             }
-            if (info.includes('Shop')){
-                setKeywordAnalysis("You used the keyword 'Shop'! That should boost your analysis.")
+            let includesAll = info.includes('Shop') || info.includes('shop') || info.includes('Buy') || info.includes('buy') || info.includes('Order') || info.includes('order') || info.includes('Create') || info.includes('create') || info.includes('Sign') || info.includes('sign') || info.includes('Log') || info.includes('log') || info.includes('Build') || info.includes('build')
+
+            if (includesAll){
+                setKeywordAnalysis("You used at least one action-oriented keyword in your h1s, creating a call to action! That should boost your user experience.")
             } else {
-                setKeywordAnalysis("You did not include the word 'Happy'")
+                setKeywordAnalysis("You did not include a call to action word in any of your h1s.")
             }
             console.log('response', response)
         }

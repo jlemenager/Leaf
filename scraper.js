@@ -11,6 +11,7 @@ app.use(cors())
 
 // let url = `https://learnwebcode.github.io/practice-requests/`
 let names;
+let h2s;
 const FindH1 = async(url) =>{
     // const filepath = path.join(__dirname, `${name}.txt`)
     const browser = await puppeteer.launch({ headless: false })
