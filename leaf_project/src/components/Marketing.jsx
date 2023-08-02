@@ -43,7 +43,7 @@ export default function Marketing(){
         labels: ['target age','percent women'],
         datasets: [
             {
-                data: marketingInfoArray.map(data=>parseFloat(data)),
+                data: [1, 2],
                 backgroundColor: [
                     '#A0C6F5'
                 ],
@@ -80,12 +80,12 @@ export default function Marketing(){
             }
         }
         setTimeout(postMarketingData, 500)
-
+        console.log(marketingInfoArray)
         setUserData({
             labels: ['target age','percent women'],
             datasets: [
                 {
-                    data: newMarketingInfoArray.map(data=>parseFloat(data)),
+                    data: [parseFloat(marketingInfo.average_target_age),parseFloat(marketingInfo.percent_women)],
                     backgroundColor: [
                         '#A0C6F5'
                     ],
