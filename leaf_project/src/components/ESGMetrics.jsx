@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import UserContext from "../UserContext"
 import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
+import PieChart from "./PieChart"
 export default function ESGMetrics(){
 
     const { businessInfo, setBusinessInfo } = useContext(UserContext)
@@ -50,22 +51,24 @@ export default function ESGMetrics(){
     // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [ghgAssessmentInfo, setGHGAssessmentInfo] = useState(GHGAssessmentInitialState)
 
-    // let newGHGAssessmentInfoArray = []
-    // let newGHGAssessmentInfoKeys = []
-    // const [ghgAssessmentInfoArray, setMarketingInfoArray] = useState(Object.values(marketingInfo))
-    // const [userData, setUserData] = useState({
-    //     labels: ['electricity_from_locations','electricity_from_factories','average_employee_commute_in_miles','employee_count','average_business_trip_commute_in_miles','total_business_trips','total_shipments','average_shipment_vehicle_type','total_miles_shipped','total_water_consumption_in_gallons','pounds_of_plastic_used','pounds_of_cardboard_used','pounds_of_wood_used','pounds_of_paper_used','pounds_of_metal_used','pounds_of_styrofoam_used','pounds_of_tetrapaks_used','pounds_of_glass_used','pounds_of_aluminumfoil_used','pounds_of_petplastic_used','pounds_of_hdpeplastic_used','pounds_of_ldpeplastic_used','pounds_of_palmoil_used','pounds_of_soybeans_used','pounds_of_beef_used','pounds_of_rubber_used','pounds_of_cocoa_used','other_material_waste_in_pounds','other_food_waste_in_pounds'],
-    //     datasets: [
-    //         {
-    //             data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
-    //             backgroundColor: [
-    //                 '#A0C6F5'
-    //             ],
-    //             borderColor:'#418EEB',
-    //             borderWidth: 2
-    //         }
-    //     ]    
-    // })
+    let newGHGAssessmentInfoArray = []
+    let newGHGAssessmentInfoKeys = []
+    const [ghgAssessmentInfoArray, setGHGAssessmentInfoArray] = useState(Object.values(ghgAssessmentInfo))
+    const [userData, setUserData] = useState({
+        labels: ['electricity_from_locations','electricity_from_factories','average_employee_commute_in_miles','employee_count','average_business_trip_commute_in_miles','total_business_trips','total_shipments','average_shipment_vehicle_type','total_miles_shipped','total_water_consumption_in_gallons','pounds_of_plastic_used','pounds_of_cardboard_used','pounds_of_wood_used','pounds_of_paper_used','pounds_of_metal_used','pounds_of_styrofoam_used','pounds_of_tetrapaks_used','pounds_of_glass_used','pounds_of_aluminumfoil_used','pounds_of_petplastic_used','pounds_of_hdpeplastic_used','pounds_of_ldpeplastic_used','pounds_of_palmoil_used','pounds_of_soybeans_used','pounds_of_beef_used','pounds_of_rubber_used','pounds_of_cocoa_used','other_material_waste_in_pounds','other_food_waste_in_pounds'],
+        datasets: [
+            {
+                data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
+                backgroundColor: [
+                    '#418EEB',
+                    '#A0C6F5',
+                    'white'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
 
     const handleChange = (event) => {
         console.log(businessInfo.id)
@@ -83,6 +86,22 @@ export default function ESGMetrics(){
             }
         }
         setTimeout(postGHGAssessmentData, 500)
+
+        setUserData({
+            labels: ['electricity_from_locations','electricity_from_factories','average_employee_commute_in_miles','employee_count','average_business_trip_commute_in_miles','total_business_trips','total_shipments','average_shipment_vehicle_type','total_miles_shipped','total_water_consumption_in_gallons','pounds_of_plastic_used','pounds_of_cardboard_used','pounds_of_wood_used','pounds_of_paper_used','pounds_of_metal_used','pounds_of_styrofoam_used','pounds_of_tetrapaks_used','pounds_of_glass_used','pounds_of_aluminumfoil_used','pounds_of_petplastic_used','pounds_of_hdpeplastic_used','pounds_of_ldpeplastic_used','pounds_of_palmoil_used','pounds_of_soybeans_used','pounds_of_beef_used','pounds_of_rubber_used','pounds_of_cocoa_used','other_material_waste_in_pounds','other_food_waste_in_pounds'],
+            datasets: [
+                {
+                    data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
+                    backgroundColor: [
+                        '#418EEB',
+                        '#A0C6F5',
+                        'white'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
     }
 
     useEffect(()=>{
@@ -240,6 +259,23 @@ export default function ESGMetrics(){
     let otherMaterialWaste = (0.15 * ghgAssessmentInfo.other_material_waste_in_pounds / 2.2046).toString()
     let otherFoodWaste = (0.58 * ghgAssessmentInfo.other_food_waste_in_pounds / 2.2046).toString()
     console.log(cocoaUsed)
+
+    const [analysisData, setAnalysisData] = useState({
+        labels: ['Total Pounds of CO2e Released from Electricity Used in Buildings and Factories','Total Pounds of CO2e Released from Travel','Pounds of CO2e is coming from in-house employees','Pounds of CO2e is coming from factory employees','Total CO2e Released from Shipping','Total Pounds of CO2e Released from Product Creation','Total Pounds of CO2e Released from Product Waste','Pounds of CO2e Released from the Total Lifecycle of Each Material','Pounds of CO2e From Plastic','Pounds of CO2e From Cardboard','Pounds of CO2e From Wood','Pounds of CO2e From Paper','Pounds of CO2e From Metal','Pounds of CO2e From Styrofoam','Pounds of CO2e From Tetra Paks','Pounds of CO2e From Glass','Pounds of CO2e From Aluminum Foil','Pounds of CO2e From PET Plastic','Pounds of CO2e From HDPE Plastic','Pounds of CO2e From LDPE Plastic','Pounds of CO2e From Palm Oil','Pounds of CO2e From Soybeans','Pounds of CO2e From Beef','Pounds of CO2e From Rubber','Pounds of CO2e From Cocoa'],
+        
+        datasets: [
+            {
+                data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
+                backgroundColor: [
+                    '#418EEB',
+                    '#A0C6F5',
+                    'white'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
     
     return (
         <div className="marketing">
@@ -355,52 +391,52 @@ export default function ESGMetrics(){
             style={{display: dataDisplay}}
             >
                 <div className='displayed-data-container'>
-                    <div className="displayed-data-left">
-                        <h4>Electricity Used in Business Locations: {ghgAssessmentInfo.electricity_from_locations} kWh</h4>
-                        <h4>Electricity Used By Factories: {ghgAssessmentInfo.electricity_from_factories} kWh</h4>
-                        <h4>Average Employee Commute: {ghgAssessmentInfo.average_employee_commute_in_miles} miles</h4>
-                        <h4>Employee Count: {ghgAssessmentInfo.employee_count}</h4>
-                        <h4>Average Business Trip Commute: {ghgAssessmentInfo.average_business_trip_commute_in_miles} miles</h4>
-                        <h4>Total Business Trips: {ghgAssessmentInfo.total_business_trips}</h4>
-                        <h4>Total Shipments: {ghgAssessmentInfo.total_shipments}</h4>
-                        <h4>Average Shipment Vehicle Type: {ghgAssessmentInfo.average_shipment_vehicle_type}</h4>
-                        <h4>Total Miles Shipped: {ghgAssessmentInfo.total_miles_shipped}</h4>
-                        <h4>Total Waste in Pounds: {ghgAssessmentInfo.total_waste_in_pounds}</h4>
-                        <h4>Main Waste Type: {ghgAssessmentInfo.main_waste_type}</h4>
-                        <h4>Total Water Consumption: {ghgAssessmentInfo.total_water_consumption_in_gallons} gallons</h4>
-                    </div>
-                    <div className="displayed-data-right">
-                        <h4>Plastic Used: {ghgAssessmentInfo.pounds_of_plastic_used} pounds</h4>
-                        <h4>Cardboard Used: {ghgAssessmentInfo.pounds_of_cardboard_used} pounds</h4>
-                        <h4>Wood Used: {ghgAssessmentInfo.pounds_of_wood_used} pounds</h4>
-                        <h4>Paper Used: {ghgAssessmentInfo.pounds_of_paper_used} pounds</h4>
-                        <h4>Metal Used: {ghgAssessmentInfo.pounds_of_metal_used} pounds</h4>
-                        <h4>Styrofoam Used: {ghgAssessmentInfo.pounds_of_styrofoam_used} pounds</h4>
-                        <h4>Tetra Paks Used: {ghgAssessmentInfo.pounds_of_tetrapaks_used} pounds</h4>
-                        <h4>Glass Used: {ghgAssessmentInfo.pounds_of_glass_used} pounds</h4>
-                        <h4>Aluminum Foil Used: {ghgAssessmentInfo.pounds_of_aluminumfoil_used} pounds</h4>
-                        <h4>PET Plastic Used: {ghgAssessmentInfo.pounds_of_petplastic_used} pounds</h4>
-                        <h4>HDPE Plastic Used: {ghgAssessmentInfo.pounds_of_hdpeplastic_used} pounds</h4>
-                        <h4>LDPE Plastic Used: {ghgAssessmentInfo.pounds_of_ldpeplastic_used} pounds</h4>
-                        <h4>Palm Oil Used: {ghgAssessmentInfo.pounds_of_palmoil_used} pounds</h4>
-                        <h4>Soybeans Used: {ghgAssessmentInfo.pounds_of_soybeans_used} pounds</h4>
-                        <h4>Beef Used: {ghgAssessmentInfo.pounds_of_beef_used} pounds</h4>
-                        <h4>Rubber Used: {ghgAssessmentInfo.pounds_of_rubber_used} pounds</h4>
-                        <h4>Cocoa Used: {ghgAssessmentInfo.pounds_of_cocoa_used} pounds</h4>
-                        <h3>CO2e Released from Waste of Other Materials: {otherMaterialWaste}</h3>
-                        <h3>CO2e Released from Waste of Other Food:{otherFoodWaste}</h3>
+                    <div className="displayed-data-group">
+                        <h1 className="tab-header">Data</h1>
+                        <h4 className='data'>Electricity Used in Business Locations: {ghgAssessmentInfo.electricity_from_locations} kWh</h4>
+                        <h4 className='data'>Electricity Used By Factories: {ghgAssessmentInfo.electricity_from_factories} kWh</h4>
+                        <h4 className='data'>Average Employee Commute: {ghgAssessmentInfo.average_employee_commute_in_miles} miles</h4>
+                        <h4 className='data'>Employee Count: {ghgAssessmentInfo.employee_count}</h4>
+                        <h4 className='data'>Average Business Trip Commute: {ghgAssessmentInfo.average_business_trip_commute_in_miles} miles</h4>
+                        <h4 className='data'>Total Business Trips: {ghgAssessmentInfo.total_business_trips}</h4>
+                        <h4 className='data'>Total Shipments: {ghgAssessmentInfo.total_shipments}</h4>
+                        <h4 className='data'>Average Shipment Vehicle Type: {ghgAssessmentInfo.average_shipment_vehicle_type}</h4>
+                        <h4 className='data'>Total Miles Shipped: {ghgAssessmentInfo.total_miles_shipped}</h4>
+                        <h4 className='data'>Total Waste in Pounds: {ghgAssessmentInfo.total_waste_in_pounds}</h4>
+                        <h4 className='data'>Main Waste Type: {ghgAssessmentInfo.main_waste_type}</h4>
+                        <h4 className='data'>Total Water Consumption: {ghgAssessmentInfo.total_water_consumption_in_gallons} gallons</h4>
+                        <h4 className='data'>Plastic Used: {ghgAssessmentInfo.pounds_of_plastic_used} pounds</h4>
+                        <h4 className='data'>Cardboard Used: {ghgAssessmentInfo.pounds_of_cardboard_used} pounds</h4>
+                        <h4 className='data'>Wood Used: {ghgAssessmentInfo.pounds_of_wood_used} pounds</h4>
+                        <h4 className='data'>Paper Used: {ghgAssessmentInfo.pounds_of_paper_used} pounds</h4>
+                        <h4 className='data'>Metal Used: {ghgAssessmentInfo.pounds_of_metal_used} pounds</h4>
+                        <h4 className='data'>Styrofoam Used: {ghgAssessmentInfo.pounds_of_styrofoam_used} pounds</h4>
+                        <h4 className='data'>Tetra Paks Used: {ghgAssessmentInfo.pounds_of_tetrapaks_used} pounds</h4>
+                        <h4 className='data'>Glass Used: {ghgAssessmentInfo.pounds_of_glass_used} pounds</h4>
+                        <h4 className='data'>Aluminum Foil Used: {ghgAssessmentInfo.pounds_of_aluminumfoil_used} pounds</h4>
+                        <h4 className='data'>PET Plastic Used: {ghgAssessmentInfo.pounds_of_petplastic_used} pounds</h4>
+                        <h4 className='data'>HDPE Plastic Used: {ghgAssessmentInfo.pounds_of_hdpeplastic_used} pounds</h4>
+                        <h4 className='data'>LDPE Plastic Used: {ghgAssessmentInfo.pounds_of_ldpeplastic_used} pounds</h4>
+                        <h4 className='data'>Palm Oil Used: {ghgAssessmentInfo.pounds_of_palmoil_used} pounds</h4>
+                        <h4 className='data'>Soybeans Used: {ghgAssessmentInfo.pounds_of_soybeans_used} pounds</h4>
+                        <h4 className='data'>Beef Used: {ghgAssessmentInfo.pounds_of_beef_used} pounds</h4>
+                        <h4 className='data'>Rubber Used: {ghgAssessmentInfo.pounds_of_rubber_used} pounds</h4>
+                        <h4 className='data'>Cocoa Used: {ghgAssessmentInfo.pounds_of_cocoa_used} pounds</h4>
+                        <h4 className='data'>CO2e Released from Waste of Other Materials: {otherMaterialWaste}</h4>
+                        <h4 className='data'>CO2e Released from Waste of Other Food:{otherFoodWaste}</h4>
                     </div>
                 </div>
             </div>
             <div className="displayed-analysis" 
             style={{display: GHGAssessmentDisplay}}
             >
-                <h4>GHG Assessment </h4>
-                <h4>Total Pounds of CO2e Released from Electricity Used in Buildings and Factories: {ELECTRICITYCO2e}</h4>
+                <h1 className="tab-header">GHG Assessment </h1>
+                <PieChart chartData={analysisData}/>
+                {/* <h4>Total Pounds of CO2e Released from Electricity Used in Buildings and Factories: {ELECTRICITYCO2e}</h4>
                 <h4>Total Pounds of CO2e Released from Travel: {TRAVELCO2e}</h4>
                 <h5>{EmployeeTravelCO2e} Pounds of CO2e is coming from in-house employees</h5>
                 <h5>{WorkerTravelCO2e} Pounds of CO2e is coming from factory employees</h5>
-                {/* <h4>Total CO2e Released from Shipping: {SHIPMENTCO2e}</h4> */}
+                <h4>Total CO2e Released from Shipping: {SHIPMENTCO2e}</h4>
                 <h4>Total Pounds of CO2e Released from Product Creation: {MATERIALSCO2e}</h4>
                 <h4>Total Pounds of CO2e Released from Product Waste: {WASTECO2e}</h4>
                 <h2>Pounds of CO2e Released from the Total Lifecycle of Each Material:</h2>
@@ -420,7 +456,7 @@ export default function ESGMetrics(){
                 <p>Soybeans: {soybeansUsed} Pounds of CO2e</p>
                 <p>Beef: {beefUsed} Pounds of CO2e</p>
                 <p>Rubber: {rubberUsed} Pounds of CO2e</p>
-                <p>Cocoa: {cocoaUsed} Pounds of CO2e</p>
+                <p>Cocoa: {cocoaUsed} Pounds of CO2e</p> */}
             </div>
             <div className="displayed-recommendations" style={{display: environmentalRecommendationsDisplay}}>
                 <h1>Environmental Recommendations</h1>
