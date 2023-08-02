@@ -13,8 +13,8 @@ export default function Nav(){
             <div className="links">
                 <Link className='link' to='/dashboard/marketing'>Marketing</Link>
                 <Link className='link' to='/dashboard/spending'>Spending</Link>
-                <Link className='link' to='/dashboard/webdesign'>Web Design</Link>
                 <Link className='link' to='/dashboard/esgmetrics'>ESG Metrics</Link>
+                <Link className='link' to='/dashboard/login'>Log In</Link>
                 <Link className='link' to='/dashboard/logout'>Log Out</Link>
             </div>
         </nav>
