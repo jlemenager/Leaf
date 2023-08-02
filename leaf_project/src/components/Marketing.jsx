@@ -33,6 +33,7 @@ export default function Marketing(){
     const [url, setUrl] = useState('')
     const [info, setInfo] = useState('')
     const [h1count, setH1Count] = useState('')
+    const [keywordAnalysis, setKeywordAnalysis] = useState('')
     const [imagePath, setImagePath] = useState('https://images.pexels.com/photos/17463091/pexels-photo-17463091/free-photo-of-lightning-bolt-in-the-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
     
     let newMarketingInfoArray = []
@@ -102,6 +103,11 @@ export default function Marketing(){
                 setH1Count('Great job! You are using over 4 h1s!')
             } else {
                 setH1Count('Try using more h1s!')
+            }
+            if (info.includes('Shop')){
+                setKeywordAnalysis("You used the keyword 'Shop'! That should boost your analysis.")
+            } else {
+                setKeywordAnalysis("You did not include the word 'Happy'")
             }
             console.log('response', response)
         }
@@ -347,6 +353,7 @@ export default function Marketing(){
                         <h1 className="tab-header">Website: <span>{marketingInfo.website}</span></h1>
                         <h2>{info}</h2>
                         <h2>{h1count}</h2>
+                        <h2>{keywordAnalysis}</h2>
                         <img src={imagePath} alt="" />
                     </div>
                     <div className="displayed-data-right">
