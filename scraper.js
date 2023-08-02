@@ -18,12 +18,12 @@ const FindH1 = async(url) =>{
     console.log('scraper running')
 
     await page.goto(url)
-    // await page.screenshot({path: "website.png"})
+    await page.screenshot({path: "website.png"})
     // const title = await page.title()
     // const content = await page.$eval("*", (element) => element.innerText)
     // const strippedContent = content.replace(/\s+/g, " ").trim()
     names = await page.evaluate(() => {
-        return Array.from(document.querySelectorAll(".info strong")).map(x => x.textContent)
+        return Array.from(document.querySelectorAll("h1")).map(x => x.textContent)
     })
 
     console.log(names)

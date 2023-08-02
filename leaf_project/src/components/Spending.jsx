@@ -100,6 +100,8 @@ export default function Spending(){
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        // localStorage.clear()
+        console.log('cleared localStorage')
         newSpendingInfoKeys = Object.keys(spendingInfo)
         let splicedKeys = newSpendingInfoKeys.splice(-15)
         newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)

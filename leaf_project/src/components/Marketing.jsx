@@ -339,7 +339,7 @@ export default function Marketing(){
             >
                 <div className='displayed-data-container'>
                     <div className="displayed-data-left">
-                        <h4>Website: {marketingInfo.website}</h4>
+                        <h1 className="tab-header">Website: {marketingInfo.website}</h1>
                         <h2>{info}</h2>
                         <img src={imagePath} alt="" />
                     </div>
