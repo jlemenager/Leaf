@@ -459,10 +459,10 @@ export default function ESGMetrics(){
                 <p>Cocoa: {cocoaUsed} Pounds of CO2e</p> */}
             </div>
             <div className="displayed-recommendations" style={{display: environmentalRecommendationsDisplay}}>
-                <h1>Environmental Recommendations</h1>
+                <h1 className="tab-header">Environmental Recommendations</h1>
             </div>
             <div className="displayed-recommendations" style={{display: workerRecommendationsDisplay}}>
-                <h1>Ethical Sourcing and Labor Recommendations</h1>
+                <h1 className="tab-header">Ethical Sourcing and Labor Recommendations</h1>
             </div>
         </div>
     )
