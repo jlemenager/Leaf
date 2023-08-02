@@ -200,6 +200,20 @@ export default function Spending(){
                 }
             ]    
         })
+        setISRData({
+            labels: ['Income to Sales Ratio', 'Average Income to Sales Ratio'],
+            datasets: [
+                {
+                    data: [ISR, 0.21],
+                    backgroundColor: [
+                        '#A0C6F5',
+                        '#418EEB'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
         setFBAData({
             labels: ['Freight Bill Accuracy', 'Average Freight Bill Accuracy'],
             datasets: [
@@ -372,6 +386,21 @@ export default function Spending(){
         ]    
     })
 
+    const [CCCData, setCCCData] = useState({
+        labels: ['Cash Flow Coverage', "Average Cash Flow Coverage"],
+        datasets: [
+            {
+                data: [CCC, 52.5],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
     const [DSIData, setDSIData] = useState({
         labels: ['Days of Sales Inventory', 'Average Days of Sales Inventory'],
         datasets: [
@@ -407,6 +436,21 @@ export default function Spending(){
         datasets: [
             {
                 data: [DSO, 37.5],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
+    const [ISRData, setISRData] = useState({
+        labels: ['Inventory to Sales Ratio', "Average Inventory to Sales Ratio"],
+        datasets: [
+            {
+                data: [ISR, 0.21],
                 backgroundColor: [
                     '#A0C6F5',
                     '#418EEB'
@@ -508,8 +552,7 @@ export default function Spending(){
             style={{display: dataDisplay}}
             >
                 <div className='displayed-data-container'>
-                    <h1>Item: {spendingInfo?.item}</h1>
-                    <p>{spendingInfo.items_sold}</p>
+                    <h1 className="tab-header">Item: <span>{spendingInfo?.item}</span></h1>
                     <BarChart chartData={userData} className='bar-chart'/>
 
                     {/* <div className="displayed-data-left">
@@ -534,20 +577,26 @@ export default function Spending(){
             <div className="displayed-analysis" 
             style={{display: analysisDisplay}}
             >
+                <h1 className="tab-header">Analysis</h1>
                 <div className="bar-chart-grid">
-                    <div className='pie-chart'>
+                    <div className='chart'>
                         <PieChart chartData={EOQData} />
                     </div>
-                    <div className='pie-chart'>
-                        <PieChart chartData={DSIData} />
+                    <div className='chart'>
+                        <BarChart chartData={CCCData} />
                     </div>
-                    <div className='pie-chart'>
-                        <PieChart chartData={DSOData} />
+                    <div className='chart'>
+                        <BarChart chartData={DSIData} />
                     </div>
-                    <div className='pie-chart'>
-                        <PieChart chartData={DPOData} />
+                    <div className='chart'>
+                        <BarChart chartData={DPOData} />
                     </div>
-                    <BarChart chartData={FBAData} />
+                    <div className='chart'>
+                        <PieChart chartData={ISRData} />
+                    </div>
+                    <div className='chart'>
+                        <PieChart chartData={FBAData} />
+                    </div>
                 </div>
                 <BarChart chartData={analysisData} />
                 {/* <h4>Economic Order Quantity: {EOQ}</h4>
@@ -561,14 +610,14 @@ export default function Spending(){
                 <h4>Freight Bill Accuracy: {FBA}</h4>  */}
             </div>
             <div className="displayed-recommendations" style={{display: recommendationsDisplay}}>
-                <h1>Recommendations</h1>
-                <p>You should place an order every time you have {ROP} {spendingInfo.item}s left</p>
-                <p>You should order around {EOQ} items every time as that is your Economic Order Quantity</p>
-                <p>You should prioritize the quality of all of your A items</p>
-                <p>{DSIRec}</p>
-                <p>{DPORec}</p>
-                <p>{DSORec}</p>
-                <p>{FBARec}</p>
+                <h1 className='tab-header'>Recommendations</h1>
+                <p className='recommendation'>You should place an order every time you have {ROP} {spendingInfo.item}s left</p>
+                <p className='recommendation'>You should order around {EOQ} items every time as that is your Economic Order Quantity</p>
+                <p className='recommendation'>You should prioritize the quality of all of your A items</p>
+                <p className='recommendation'>{DSIRec}</p>
+                <p className='recommendation'>{DPORec}</p>
+                <p className='recommendation'>{DSORec}</p>
+                <p className='recommendation'>{FBARec}</p>
             </div>
         </div>
     )

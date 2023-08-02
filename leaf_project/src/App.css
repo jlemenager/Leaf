@@ -297,6 +297,14 @@ main{
   width:800px;
 }
 
+.tab-header{
+  margin:70px 20px;
+  color: #A0C6F5;
+}
+
+span{
+  color: #418EEB;
+}
 /* Charts */
 
 
@@ -305,8 +313,30 @@ main{
 }
 
 .bar-chart-grid{
-  display:grid;
-  grid-template-columns: 50% 50%;
+  margin-top:80px;
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart{
+  height:700px;
+  width:33vw;
+}
+
+/* Recommendations */
+
+.recommendation{
+  background-color: #A0C6F5;
+  color: #F5F9FE;
+  border-radius: 1.625rem;
+  margin:20px;
+  padding: 30px 20px;
+}
+.recommendation:hover{
+  padding:40px 20px;
+  background-color: #418EEB;
 }
 
 
