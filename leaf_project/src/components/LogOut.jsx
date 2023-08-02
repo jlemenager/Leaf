@@ -65,8 +65,8 @@ export default function LogOut(){
                 <div className="user-top">
                     <h1>Log Out</h1>
                 </div>
-                <button className='user-submit-button' onClick={handleSubmit}>Log<Link to='/dashboard/login'> Out</Link></button>
-                <button onClick={handleDelete}>Delete Account</button>
+                <button className='user-submit-button' onClick={handleSubmit}><Link className="log-out-link" to='/dashboard/login'>Log Out</Link></button>
+                <button className='delete-button' onClick={handleDelete}>Delete Account</button>
                 {/* <Link className='user-submit-link' to='/dashboard'></Link>  */}
             </div>
             <IntroFooter />

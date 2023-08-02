@@ -37,11 +37,11 @@ export default function LogIn(){
         e.preventDefault()
         console.log('working')
         const response = await axios.get('http://localhost:8000/business/')
+        // let is_logged_in;
         for (let i = 0; i < response.data.length; i++){
             if (response.data[i].business_name == formState.business_name){
-                const response2 = await axios.put(`http://localhost:8000/business/${i}`, is_logged_in= true)
+                const response2 = await axios.put(`http://localhost:8000/business/${i}`, {...businessInfo, is_logged_in: true})
                 setBusinessInfo(response.data[i])
-                console.log(businessInfo)
             }
         }
         // setBusinessInfo({...businessInfo, business_id: businessInfo.id})
@@ -54,15 +54,13 @@ export default function LogIn(){
         // setBusinessInfo({...businessInfo, [id]: business_url.splice(31,34)})
     }
                    
-    return businessInfo.is_logged_in === true ? (
-        <Dashboard />
-    ) : (
+    return (
         <div>
             {/* <UserNav /> */}
             <div className="user-account-change signup">
                 <div className="user-top">
                     <h1>Log In</h1>
-                    <p>Want to create a new account? <Link className='user-bridge-link' to='/login'>Sign Up</Link></p>
+                    <p>Want to create a new account? <Link className='user-bridge-link' to='/dashboard/signup'>Sign Up</Link></p>
                 </div>
                 <div className="user-forms">
                     <div className="business-name-form user-form-section">

@@ -34,7 +34,7 @@ export default function SignUp(){
             <div className="user-account-change signup">
                 <div className="user-top">
                     <h1>Sign Up</h1>
-                    <p>Already have an account? <Link className='user-bridge-link' to='/login'>Log In</Link></p>
+                    <p>Already have an account? <Link className='user-bridge-link' to='/dashboard/login'>Log In</Link></p>
                 </div>
                 <div className="user-forms">
                     <div className="business-name-form user-form-section">
