@@ -516,6 +516,7 @@ export default function ESGMetrics(){
                     <div class-name='environmental-chart'>
                         <BarChart chartData={materialData}/>
                     </div>
+                    <p className="recommendation">Note how you compare to the average emission. Also take a look at the greenhouse gas assessment and see what's taking up the bulk of your emissions. Prioritize bioplastics and/or the ingredients not in the survey list if you can.</p>
                 </div>
             </div>
             <div className="displayed-recommendations" style={{display: workerRecommendationsDisplay}}>
