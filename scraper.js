@@ -18,7 +18,7 @@ const FindH1 = async(url) =>{
     console.log('scraper running')
 
     await page.goto(url)
-    await page.screenshot({path: "website.png"})
+    // await page.screenshot({path: "website.png"})
     // const title = await page.title()
     // const content = await page.$eval("*", (element) => element.innerText)
     // const strippedContent = content.replace(/\s+/g, " ").trim()
@@ -28,7 +28,7 @@ const FindH1 = async(url) =>{
 
     console.log(names)
 
-    await page.screenshot({ path: `leaf_project/src/images/website.png`})
+    // await page.screenshot({ path: `leaf_project/src/images/website.png`})
     // const h1s = await page.$$eval("h1", (headers) => {
     //     return headers.map(x => x.textContent)
     // })

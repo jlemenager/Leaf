@@ -32,13 +32,14 @@ export default function Marketing(){
     const [marketingInfo, setMarketingInfo] = useState(marketingInitialState)
     const [url, setUrl] = useState('')
     const [info, setInfo] = useState('')
+    const [h1count, setH1Count] = useState('')
     const [imagePath, setImagePath] = useState('https://images.pexels.com/photos/17463091/pexels-photo-17463091/free-photo-of-lightning-bolt-in-the-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
     
     let newMarketingInfoArray = []
     let newMarketingInfoKeys = []
     const [marketingInfoArray, setMarketingInfoArray] = useState(Object.values(marketingInfo))
     const [userData, setUserData] = useState({
-        labels: ['target demographic','percent women','target state'],
+        labels: ['target demographic','percent women'],
         datasets: [
             {
                 data: marketingInfoArray.map(data=>parseFloat(data)),
@@ -78,16 +79,15 @@ export default function Marketing(){
             }
         }
         setTimeout(postMarketingData, 500)
-
+        // newMarketingInfoArray = marketingInfoArray.pop()
         setUserData({
-            labels: ['target demographic','percent women','target state'],
+            labels: ['target demographic','percent women'],
             datasets: [
                 {
                     data: newMarketingInfoArray.map(data=>parseFloat(data)),
                     backgroundColor: [
                         '#A0C6F5',
-                        '#418EEB',
-                        'white'
+                        '#418EEB'
                     ],
                     borderColor:'#418EEB',
                     borderWidth: 2
@@ -98,6 +98,11 @@ export default function Marketing(){
         const getScrapedData = async() => {
             const response = await axios.post(`http://localhost:4000/getinfo`, {url: url})
             setInfo(JSON.stringify(response.data))
+            if(info.length >= 5){
+                setH1Count('Great job! You are using over 4 h1s!')
+            } else {
+                setH1Count('Try using more h1s!')
+            }
             console.log('response', response)
         }
         getScrapedData()
@@ -339,8 +344,9 @@ export default function Marketing(){
             >
                 <div className='displayed-data-container'>
                     <div className="displayed-data-left">
-                        <h1 className="tab-header">Website: {marketingInfo.website}</h1>
+                        <h1 className="tab-header">Website: <span>{marketingInfo.website}</span></h1>
                         <h2>{info}</h2>
+                        <h2>{h1count}</h2>
                         <img src={imagePath} alt="" />
                     </div>
                     <div className="displayed-data-right">
