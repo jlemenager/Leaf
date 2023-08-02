@@ -338,7 +338,7 @@ export default function ESGMetrics(){
             >
                 <div className="data-inputs">
                     <div className="data-input-column">
-                        <h1>Energy and Waste</h1>
+                        <h1 className='esg-input-header'>Energy and Waste</h1>
                         <div className="data-input-container">
                             <input className='data-input' type="text" id="electricity_from_locations" onChange={handleChange} placeholder="Electricity Used By Business Locations (in kWh)"/>
                         </div>
@@ -371,7 +371,7 @@ export default function ESGMetrics(){
                         </div>
                     </div>
                     <div className="data-input-column">
-                        <h1>Materials</h1>
+                        <h1 className='esg-input-header'>Materials</h1>
                         <div className="data-input-container">
                             <input className='data-input' type="text" id="pounds_of_plastic_used" onChange={handleChange} placeholder="Pounds of Plastic Used"/>
                         </div>
@@ -431,7 +431,7 @@ export default function ESGMetrics(){
                         </div>
                     </div>
                 </div>
-                <button onClick={handleSubmit}>Submit</button>
+                <button className='submit-button' onClick={handleSubmit}>Submit</button>
             </div>
             <div className="displayed-data" 
             style={{display: dataDisplay}}

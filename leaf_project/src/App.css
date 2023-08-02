@@ -288,6 +288,22 @@ main{
   padding:30px 0 0 30px;
 }
 
+.submit-button{
+  background-color: #F5F9FE;
+  border: 2px solid #418EEB;
+  color: #418EEB;
+  border-radius: 1.625rem;
+  padding:20px 30px;
+  margin:30px 0 0 80px;
+}
+
+.submit-button:hover{
+  background-color: #418EEB;
+  border: 2px solid #A0C6F5;
+  color: #F5F9FE;
+  cursor: pointer;
+}
+
 /* SEO */
 
 /* Social Media */
@@ -368,3 +384,9 @@ span{
 /* .environmental-chart{
   width:33vw;
 } */
+
+.esg-input-header{
+  color: #A0C6F5;
+  margin-left:10px;
+}
+

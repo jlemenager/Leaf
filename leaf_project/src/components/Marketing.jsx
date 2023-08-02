@@ -332,7 +332,7 @@ export default function Marketing(){
                         </div>
                     </div>
                 </div>
-                <button onClick={handleSubmit}>Submit</button>
+                <button className='submit-button' onClick={handleSubmit}>Submit</button>
             </div>
             <div className="displayed-data" 
             style={{display: dataDisplay}}
