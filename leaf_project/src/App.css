@@ -328,6 +328,20 @@ main{
 
 /* SEO */
 
+.SEO-analysis{
+  background-color: #A0C6F5;
+  color: #F5F9FE;
+  padding: 20px 30px;
+  margin:20px 30px;
+  border-radius: 1.625rem;
+}
+
+.SEO-analysis:hover{
+  background-color: #418EEB;
+  color: #F5F9FE;
+  padding: 25px 30px;
+}
+
 /* Social Media */
 
 .social-media-header{

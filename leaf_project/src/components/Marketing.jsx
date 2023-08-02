@@ -99,6 +99,7 @@ export default function Marketing(){
         const getScrapedData = async() => {
             const response = await axios.post(`http://localhost:4000/getinfo`, {url: url})
             setInfo(JSON.stringify(response.data))
+            // setInfo(info.substring(1,-1))
             if(info.length >= 5){
                 setH1Count('Great job! You are using over 4 h1s!')
             } else {
@@ -353,9 +354,9 @@ export default function Marketing(){
                 <div className='displayed-data-container'>
                     <div className="displayed-data-left">
                         <h1 className="tab-header">Website: <span>{marketingInfo.website}</span></h1>
-                        <h2>{info}</h2>
-                        <h2>{h1count}</h2>
-                        <h2>{keywordAnalysis}</h2>
+                        <h2 className="SEO-analysis">{info}</h2>
+                        <h2 className="SEO-analysis">{h1count}</h2>
+                        <h2 className="SEO-analysis">{keywordAnalysis}</h2>
                         <img src={imagePath} alt="" />
                     </div>
                     <div className="displayed-data-right">
