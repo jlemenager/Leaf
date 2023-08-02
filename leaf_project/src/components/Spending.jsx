@@ -144,6 +144,76 @@ export default function Spending(){
                 }
             ]    
         })
+        setEOQData({
+            labels: ['Economic Order Quantity', 'Average Economic Order Quantity'],
+            datasets: [
+                {
+                    data: [EOQ, 40],
+                    backgroundColor: [
+                        '#A0C6F5',
+                        '#418EEB'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+        setDSIData({
+            labels: ['Days of Sales Inventory', 'Average Days of Sales Inventory'],
+            datasets: [
+                {
+                    data: [DSI, 40],
+                    backgroundColor: [
+                        '#A0C6F5',
+                        '#418EEB'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+        setDSOData({
+            labels: ['Days Payable Outstanding', 'Average Days Payable Outstanding'],
+            datasets: [
+                {
+                    data: [DPO, 25],
+                    backgroundColor: [
+                        '#A0C6F5',
+                        '#418EEB'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+        setDPOData({
+            labels: ['Days Payable Outstanding', 'Average Days Payable Outstanding'],
+            datasets: [
+                {
+                    data: [DPO, 25],
+                    backgroundColor: [
+                        '#A0C6F5',
+                        '#418EEB'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+        setFBAData({
+            labels: ['Freight Bill Accuracy', 'Average Freight Bill Accuracy'],
+            datasets: [
+                {
+                    data: [FBA, 0.85],
+                    backgroundColor: [
+                        '#A0C6F5',
+                        '#418EEB'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
         // console.log(spendingInfoArray)
     }
 
@@ -277,7 +347,7 @@ export default function Spending(){
         labels: ['Economic Order Quantity', 'Cash Conversion Cycle', 'Days Sales of Inventory', 'Days Payable Outstanding', 'Days Sales Outstanding', 'Inventory / Sales Ratio', 'ABC Analysis', 'Reorder Point', 'Freight Bill Accuracy'],
         datasets: [
             {
-                data: [EOQ,CCC,DSI,DPO,DSO,ISR,ABC,ROP,FBA],
+                data: [EOQ, DSI, DSO, DPO, ISR, ABC, ROP, FBA],
                 backgroundColor: [
                     '#A0C6F5'
                 ],
@@ -286,6 +356,82 @@ export default function Spending(){
             }
         ]    
     })
+
+    const [EOQData, setEOQData] = useState({
+        labels: ['Economic Order Quantity', 'Average Economic Order Quantity'],
+        datasets: [
+            {
+                data: [EOQ, 40],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
+    const [DSIData, setDSIData] = useState({
+        labels: ['Days of Sales Inventory', 'Average Days of Sales Inventory'],
+        datasets: [
+            {
+                data: [DSI, 40],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
+    const [DPOData, setDPOData] = useState({
+        labels: ['Days Payable Outstanding', 'Average Days Payable Outstanding'],
+        datasets: [
+            {
+                data: [DPO, 25],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
+    const [DSOData, setDSOData] = useState({
+        labels: ['Days Sales Outstanding', "Average Days Sales Outstanding"],
+        datasets: [
+            {
+                data: [DSO, 37.5],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
+    const [FBAData, setFBAData] = useState({
+        labels: ['Freight Bill Accuracy', 'Average Freight Bill Accuracy'],
+        datasets: [
+            {
+                data: [FBA, 0.85],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
     return (
         <div className="spending">
             <h1 className="spending-header">A Hub for All of Your Spending Data</h1>
@@ -388,6 +534,21 @@ export default function Spending(){
             <div className="displayed-analysis" 
             style={{display: analysisDisplay}}
             >
+                <div className="bar-chart-grid">
+                    <div className='pie-chart'>
+                        <PieChart chartData={EOQData} />
+                    </div>
+                    <div className='pie-chart'>
+                        <PieChart chartData={DSIData} />
+                    </div>
+                    <div className='pie-chart'>
+                        <PieChart chartData={DSOData} />
+                    </div>
+                    <div className='pie-chart'>
+                        <PieChart chartData={DPOData} />
+                    </div>
+                    <BarChart chartData={FBAData} />
+                </div>
                 <BarChart chartData={analysisData} />
                 {/* <h4>Economic Order Quantity: {EOQ}</h4>
                 <h4>Cash Conversion Cycle: {CCC}</h4>

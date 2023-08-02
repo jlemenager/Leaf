@@ -304,5 +304,9 @@ main{
   width:100vw;
 }
 
+.bar-chart-grid{
+  display:grid;
+  grid-template-columns: 50% 50%;
+}
 
 
