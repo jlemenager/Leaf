@@ -44,7 +44,7 @@ export default function Spending(){
     let newSpendingInfoKeys = []
 
     // Chart Data
-
+    const [renewedSpendingInfo, setRenewedSpendingInfo] = useState(null)
     const [spendingInfoArray, setSpendingInfoArray] = useState(Object.values(spendingInfo))
     const [userData, setUserData] = useState({
         labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
@@ -59,35 +59,26 @@ export default function Spending(){
             }
         ]    
     })
-
-    // onChange Input Functions
-
+    
     const handleChange = (event) => {
         // console.log(businessInfo)
         setSpendingInfo({...spendingInfo, [event.target.id]: event.target.value})
         // console.log(Object.values(spendingInfo))
         setSpendingInfoArray(Object.values(spendingInfo))
-        console.log(spendingInfoArray)
         
         // for (let i = 0; i < spendingInfoArray.length; i++){
         //     newSpendingInfoArray.push(parseFloat(spendingInfoArray[i]))
         // }
     }
 
-    useEffect(()=>{
-        setUserData({
-            labels: newSpendingInfoKeys,
-            datasets: [
-                {
-                    data: newSpendingInfoArray.map(data=>parseFloat(data)),
-                    backgroundColor: [
-                        '#A0C6F5'
-                    ],
-                    borderColor:'#418EEB',
-                    borderWidth: 2
-                }
-            ]    
-        })
+    useEffect(()=> {
+        const getResponseAPI = async() => {
+            console.log(businessInfo)
+            console.log(spendingInfo)
+            const response = await axios.get('http://localhost:8000/spendingdata/')
+            setSpendingInfo(response.data.find(spendingData=>spendingData.business_id === businessInfo.id))
+        }
+        getResponseAPI()
     }, [])
 
     // On Submit
@@ -95,12 +86,8 @@ export default function Spending(){
     const handleSubmit = async(e) => {
         e.preventDefault()
         newSpendingInfoKeys = Object.keys(spendingInfo)
-        console.log(newSpendingInfoKeys)
-        newSpendingInfoKeys.splice(3,newSpendingInfoKeys.length-1)
-        console.log(newSpendingInfoKeys)
-        console.log(spendingInfoArray)
+        let splicedKeys = newSpendingInfoKeys.splice(-15)
         newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)
-        console.log(newSpendingInfoArray)
         if ((parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) > 1){
             setABCRating('C')
         } else if (0< (parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) < 1){
@@ -116,6 +103,32 @@ export default function Spending(){
             }
         }
         setTimeout(postSpendingData, 500)
+        setUserData({
+            labels: splicedKeys,
+            datasets: [
+                {
+                    data: newSpendingInfoArray.map(data=>parseFloat(data)),
+                    backgroundColor: [
+                        '#A0C6F5'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+        setAnalysisData({
+            labels: ['Economic Order Quantity', 'Cash Conversion Cycle', 'Days Sales of Inventory', 'Days Payable Outstanding', 'Days Sales Outstanding', 'Inventory / Sales Ratio', 'ABC Analysis', 'Reorder Point', 'Freight Bill Accuracy'],
+            datasets: [
+                {
+                    data: [EOQ,CCC,DSI,DPO,DSO,ISR,ABC,ROP,FBA],
+                    backgroundColor: [
+                        '#A0C6F5'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
         // console.log(spendingInfoArray)
     }
 
@@ -244,6 +257,20 @@ export default function Spending(){
     } else {
         FBARec = 'Your Freight Bill Accuracy is great! Stay with your freight company, they are certainly not losing you money due to errors'
     }
+
+    const [analysisData, setAnalysisData] = useState({
+        labels: ['Economic Order Quantity', 'Cash Conversion Cycle', 'Days Sales of Inventory', 'Days Payable Outstanding', 'Days Sales Outstanding', 'Inventory / Sales Ratio', 'ABC Analysis', 'Reorder Point', 'Freight Bill Accuracy'],
+        datasets: [
+            {
+                data: [EOQ,CCC,DSI,DPO,DSO,ISR,ABC,ROP,FBA],
+                backgroundColor: [
+                    '#A0C6F5'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
     return (
         <div className="spending">
             <h1 className="spending-header">A Hub for All of Your Spending Data</h1>
@@ -345,8 +372,8 @@ export default function Spending(){
             <div className="displayed-analysis" 
             style={{display: analysisDisplay}}
             >
-                {/* <h4>Gross Margin Return on Investment: {GMROI}</h4> */}
-                <h4>Economic Order Quantity: {EOQ}</h4>
+                <BarChart chartData={analysisData} />
+                {/* <h4>Economic Order Quantity: {EOQ}</h4>
                 <h4>Cash Conversion Cycle: {CCC}</h4>
                 <h4>Days Sales of Inventory: {DSI}</h4>
                 <h4>Days Payable Outstanding: {DPO}</h4>
@@ -354,7 +381,7 @@ export default function Spending(){
                 <h4>Inventory / Sales Ratio: {ISR}</h4>
                 <h4>ABC Analysis: {ABC} and is therefore a/an {ABCRating} item</h4>
                 <h4>Reorder Point: {ROP}</h4>
-                <h4>Freight Bill Accuracy: {FBA}</h4> 
+                <h4>Freight Bill Accuracy: {FBA}</h4>  */}
             </div>
             <div className="displayed-recommendations" style={{display: recommendationsDisplay}}>
                 <h1>Recommendations</h1>
