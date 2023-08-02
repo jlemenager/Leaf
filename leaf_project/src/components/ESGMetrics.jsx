@@ -50,6 +50,53 @@ export default function ESGMetrics(){
     // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [ghgAssessmentInfo, setGHGAssessmentInfo] = useState(GHGAssessmentInitialState)
 
+    // let newGHGAssessmentInfoArray = []
+    // let newGHGAssessmentInfoKeys = []
+    // const [ghgAssessmentInfoArray, setMarketingInfoArray] = useState(Object.values(marketingInfo))
+    // const [userData, setUserData] = useState({
+    //     labels: ['electricity_from_locations','electricity_from_factories','average_employee_commute_in_miles','employee_count'],
+    //     datasets: [
+    //         {
+    //             data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
+    //             backgroundColor: [
+    //                 '#A0C6F5'
+    //             ],
+    //             borderColor:'#418EEB',
+    //             borderWidth: 2
+    //         }
+    //     ]    
+    // })
+
+    // : '',
+    // : '',
+    // : '',
+    // : '',
+    // average_business_trip_commute_in_miles: '',
+    // total_business_trips: '',
+    // total_shipments: '',
+    // average_shipment_vehicle_type: '',
+    // total_miles_shipped: '',
+    // total_water_consumption_in_gallons: '',
+    // pounds_of_plastic_used: '',
+    // pounds_of_cardboard_used: '',
+    // pounds_of_wood_used: '',
+    // pounds_of_paper_used: '',
+    // pounds_of_metal_used: '',
+    // pounds_of_styrofoam_used: '',
+    // pounds_of_tetrapaks_used: '',
+    // pounds_of_glass_used: '',
+    // pounds_of_aluminumfoil_used: '',
+    // pounds_of_petplastic_used: '',
+    // pounds_of_hdpeplastic_used: '',
+    // pounds_of_ldpeplastic_used: '',
+    // pounds_of_palmoil_used: '',
+    // pounds_of_soybeans_used: '',
+    // pounds_of_beef_used: '',
+    // pounds_of_rubber_used: '',
+    // pounds_of_cocoa_used: '',
+    // other_material_waste_in_pounds: '',
+    // other_food_waste_in_pounds: ''
+
     const handleChange = (event) => {
         console.log(businessInfo.id)
         setGHGAssessmentInfo({...ghgAssessmentInfo, [event.target.id]: event.target.value})

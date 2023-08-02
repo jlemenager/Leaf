@@ -33,11 +33,15 @@ export default function Marketing(){
     const [url, setUrl] = useState('')
     const [info, setInfo] = useState('')
     const [imagePath, setImagePath] = useState('https://images.pexels.com/photos/17463091/pexels-photo-17463091/free-photo-of-lightning-bolt-in-the-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
+    
+    let newMarketingInfoArray = []
+    let newMarketingInfoKeys = []
+    const [marketingInfoArray, setMarketingInfoArray] = useState(Object.values(marketingInfo))
     const [userData, setUserData] = useState({
-        labels: ['1', '2', '3'],
+        labels: ['target demographic','percent women','target state'],
         datasets: [
             {
-                data: marketingInfo.map(data=>parseFloat(data)),
+                data: marketingInfoArray.map(data=>parseFloat(data)),
                 backgroundColor: [
                     '#A0C6F5'
                 ],
@@ -75,7 +79,21 @@ export default function Marketing(){
         }
         setTimeout(postMarketingData, 500)
 
-
+        setUserData({
+            labels: ['target demographic','percent women','target state'],
+            datasets: [
+                {
+                    data: newMarketingInfoArray.map(data=>parseFloat(data)),
+                    backgroundColor: [
+                        '#A0C6F5',
+                        '#418EEB',
+                        'white'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
 
         const getScrapedData = async() => {
             const response = await axios.post(`http://localhost:4000/getinfo`, {url: url})
@@ -339,6 +357,7 @@ export default function Marketing(){
             </div>
             <div className="displayed-recommendations" style={{display: socialMediaRecommendationsDisplay}}>
                 <h1 className='tab-header'>Social Media Recommendations</h1>
+                <BarChart chartData={userData} />
                 <p className='recommendation'>Based on your current or target customer demographics, we recommend to prioritize marketing on {TotalRec}, however the more social media sites you can market on the better.</p>
                 <p className='recommendation'>We would also recommend, based on your industry, that you also focus on {IndustryRec1}, {IndustryRec2}, and {IndustryRec3}.</p>
                 <p className='recommendation'>We also recommend that you utilize social media, especially the sites mentioned above, to educate your audience, produce different kinds of content, look for micro-influencers, as well as try stories and live streaming.</p>
