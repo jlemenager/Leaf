@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import UserContext from "../UserContext"
 import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
+import BarChart from "./BarChart"
 import PieChart from "./PieChart"
 export default function ESGMetrics(){
 
@@ -276,6 +277,51 @@ export default function ESGMetrics(){
             }
         ]    
     })
+
+    const [electricityData, setElectricityData] = useState({
+        labels: ['Total Pounds of CO2e Released from Electricity Used in Buildings and Factories','Average Total Pounds of CO2e Released from Electricity Used in Buildings and Factories'],
+        datasets: [
+            {
+                data: [ELECTRICITYCO2e, 2000000],
+                backgroundColor: [
+                    '#418EEB',
+                    '#A0C6F5'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
+    const [shipmentData, setShipmentData] = useState({
+        labels: ['Total CO2e Released from Shipping','Average Total CO2e Released from Shipping'],
+        datasets: [
+            {
+                data: [SHIPMENTCO2e, 10000],
+                backgroundColor: [
+                    '#418EEB',
+                    '#A0C6F5'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+
+    const [materialData, setMaterialData] = useState({
+        labels: ['Pounds of CO2e Released from the Total Lifecycle of Each Material','Average Pounds of CO2e Released from the Total Lifecycle of Each Material'],
+        datasets: [
+            {
+                data: [MATERIALSCO2e, 2000000],
+                backgroundColor: [
+                    '#418EEB',
+                    '#A0C6F5'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
     
     return (
         <div className="marketing">
@@ -393,37 +439,37 @@ export default function ESGMetrics(){
                 <div className='displayed-data-container'>
                     <div className="displayed-data-group">
                         <h1 className="tab-header">Data</h1>
-                        <h4 className='data'>Electricity Used in Business Locations: {ghgAssessmentInfo.electricity_from_locations} kWh</h4>
-                        <h4 className='data'>Electricity Used By Factories: {ghgAssessmentInfo.electricity_from_factories} kWh</h4>
-                        <h4 className='data'>Average Employee Commute: {ghgAssessmentInfo.average_employee_commute_in_miles} miles</h4>
-                        <h4 className='data'>Employee Count: {ghgAssessmentInfo.employee_count}</h4>
-                        <h4 className='data'>Average Business Trip Commute: {ghgAssessmentInfo.average_business_trip_commute_in_miles} miles</h4>
-                        <h4 className='data'>Total Business Trips: {ghgAssessmentInfo.total_business_trips}</h4>
-                        <h4 className='data'>Total Shipments: {ghgAssessmentInfo.total_shipments}</h4>
-                        <h4 className='data'>Average Shipment Vehicle Type: {ghgAssessmentInfo.average_shipment_vehicle_type}</h4>
-                        <h4 className='data'>Total Miles Shipped: {ghgAssessmentInfo.total_miles_shipped}</h4>
-                        <h4 className='data'>Total Waste in Pounds: {ghgAssessmentInfo.total_waste_in_pounds}</h4>
-                        <h4 className='data'>Main Waste Type: {ghgAssessmentInfo.main_waste_type}</h4>
-                        <h4 className='data'>Total Water Consumption: {ghgAssessmentInfo.total_water_consumption_in_gallons} gallons</h4>
-                        <h4 className='data'>Plastic Used: {ghgAssessmentInfo.pounds_of_plastic_used} pounds</h4>
-                        <h4 className='data'>Cardboard Used: {ghgAssessmentInfo.pounds_of_cardboard_used} pounds</h4>
-                        <h4 className='data'>Wood Used: {ghgAssessmentInfo.pounds_of_wood_used} pounds</h4>
-                        <h4 className='data'>Paper Used: {ghgAssessmentInfo.pounds_of_paper_used} pounds</h4>
-                        <h4 className='data'>Metal Used: {ghgAssessmentInfo.pounds_of_metal_used} pounds</h4>
-                        <h4 className='data'>Styrofoam Used: {ghgAssessmentInfo.pounds_of_styrofoam_used} pounds</h4>
-                        <h4 className='data'>Tetra Paks Used: {ghgAssessmentInfo.pounds_of_tetrapaks_used} pounds</h4>
-                        <h4 className='data'>Glass Used: {ghgAssessmentInfo.pounds_of_glass_used} pounds</h4>
-                        <h4 className='data'>Aluminum Foil Used: {ghgAssessmentInfo.pounds_of_aluminumfoil_used} pounds</h4>
-                        <h4 className='data'>PET Plastic Used: {ghgAssessmentInfo.pounds_of_petplastic_used} pounds</h4>
-                        <h4 className='data'>HDPE Plastic Used: {ghgAssessmentInfo.pounds_of_hdpeplastic_used} pounds</h4>
-                        <h4 className='data'>LDPE Plastic Used: {ghgAssessmentInfo.pounds_of_ldpeplastic_used} pounds</h4>
-                        <h4 className='data'>Palm Oil Used: {ghgAssessmentInfo.pounds_of_palmoil_used} pounds</h4>
-                        <h4 className='data'>Soybeans Used: {ghgAssessmentInfo.pounds_of_soybeans_used} pounds</h4>
-                        <h4 className='data'>Beef Used: {ghgAssessmentInfo.pounds_of_beef_used} pounds</h4>
-                        <h4 className='data'>Rubber Used: {ghgAssessmentInfo.pounds_of_rubber_used} pounds</h4>
-                        <h4 className='data'>Cocoa Used: {ghgAssessmentInfo.pounds_of_cocoa_used} pounds</h4>
-                        <h4 className='data'>CO2e Released from Waste of Other Materials: {otherMaterialWaste}</h4>
-                        <h4 className='data'>CO2e Released from Waste of Other Food:{otherFoodWaste}</h4>
+                        <h4 className='data-item'>Electricity Used in Business Locations: {ghgAssessmentInfo.electricity_from_locations} kWh</h4>
+                        <h4 className='data-item'>Electricity Used By Factories: {ghgAssessmentInfo.electricity_from_factories} kWh</h4>
+                        <h4 className='data-item'>Average Employee Commute: {ghgAssessmentInfo.average_employee_commute_in_miles} miles</h4>
+                        <h4 className='data-item'>Employee Count: {ghgAssessmentInfo.employee_count}</h4>
+                        <h4 className='data-item'>Average Business Trip Commute: {ghgAssessmentInfo.average_business_trip_commute_in_miles} miles</h4>
+                        <h4 className='data-item'>Total Business Trips: {ghgAssessmentInfo.total_business_trips}</h4>
+                        <h4 className='data-item'>Total Shipments: {ghgAssessmentInfo.total_shipments}</h4>
+                        <h4 className='data-item'>Average Shipment Vehicle Type: {ghgAssessmentInfo.average_shipment_vehicle_type}</h4>
+                        <h4 className='data-item'>Total Miles Shipped: {ghgAssessmentInfo.total_miles_shipped}</h4>
+                        <h4 className='data-item'>Total Waste in Pounds: {ghgAssessmentInfo.total_waste_in_pounds}</h4>
+                        <h4 className='data-item'>Main Waste Type: {ghgAssessmentInfo.main_waste_type}</h4>
+                        <h4 className='data-item'>Total Water Consumption: {ghgAssessmentInfo.total_water_consumption_in_gallons} gallons</h4>
+                        <h4 className='data-item'>Plastic Used: {ghgAssessmentInfo.pounds_of_plastic_used} pounds</h4>
+                        <h4 className='data-item'>Cardboard Used: {ghgAssessmentInfo.pounds_of_cardboard_used} pounds</h4>
+                        <h4 className='data-item'>Wood Used: {ghgAssessmentInfo.pounds_of_wood_used} pounds</h4>
+                        <h4 className='data-item'>Paper Used: {ghgAssessmentInfo.pounds_of_paper_used} pounds</h4>
+                        <h4 className='data-item'>Metal Used: {ghgAssessmentInfo.pounds_of_metal_used} pounds</h4>
+                        <h4 className='data-item'>Styrofoam Used: {ghgAssessmentInfo.pounds_of_styrofoam_used} pounds</h4>
+                        <h4 className='data-item'>Tetra Paks Used: {ghgAssessmentInfo.pounds_of_tetrapaks_used} pounds</h4>
+                        <h4 className='data-item'>Glass Used: {ghgAssessmentInfo.pounds_of_glass_used} pounds</h4>
+                        <h4 className='data-item'>Aluminum Foil Used: {ghgAssessmentInfo.pounds_of_aluminumfoil_used} pounds</h4>
+                        <h4 className='data-item'>PET Plastic Used: {ghgAssessmentInfo.pounds_of_petplastic_used} pounds</h4>
+                        <h4 className='data-item'>HDPE Plastic Used: {ghgAssessmentInfo.pounds_of_hdpeplastic_used} pounds</h4>
+                        <h4 className='data-item'>LDPE Plastic Used: {ghgAssessmentInfo.pounds_of_ldpeplastic_used} pounds</h4>
+                        <h4 className='data-item'>Palm Oil Used: {ghgAssessmentInfo.pounds_of_palmoil_used} pounds</h4>
+                        <h4 className='data-item'>Soybeans Used: {ghgAssessmentInfo.pounds_of_soybeans_used} pounds</h4>
+                        <h4 className='data-item'>Beef Used: {ghgAssessmentInfo.pounds_of_beef_used} pounds</h4>
+                        <h4 className='data-item'>Rubber Used: {ghgAssessmentInfo.pounds_of_rubber_used} pounds</h4>
+                        <h4 className='data-item'>Cocoa Used: {ghgAssessmentInfo.pounds_of_cocoa_used} pounds</h4>
+                        <h4 className='data-item'>CO2e Released from Waste of Other Materials: {otherMaterialWaste}</h4>
+                        <h4 className='data-item'>CO2e Released from Waste of Other Food:{otherFoodWaste}</h4>
                     </div>
                 </div>
             </div>
@@ -460,9 +506,22 @@ export default function ESGMetrics(){
             </div>
             <div className="displayed-recommendations" style={{display: environmentalRecommendationsDisplay}}>
                 <h1 className="tab-header">Environmental Recommendations</h1>
+                <div className="environmental-recommendations-container">
+                    <div class-name='environmental-chart'>
+                        <BarChart chartData={electricityData}/>
+                    </div>
+                    <div class-name='environmental-chart'>
+                        <BarChart chartData={shipmentData}/>
+                    </div>
+                    <div class-name='environmental-chart'>
+                        <BarChart chartData={materialData}/>
+                    </div>
+                </div>
             </div>
             <div className="displayed-recommendations" style={{display: workerRecommendationsDisplay}}>
                 <h1 className="tab-header">Ethical Sourcing and Labor Recommendations</h1>
+                <p className="recommendation">Your supply chain is very long and indirect. Making sure that all levels of the supply chain are treated fairly can be hard, but is very important.</p>
+                <p className="recommendation">Try segmenting out your supply chain into pieces to easily isolate what needs to be improved.</p>
             </div>
         </div>
     )

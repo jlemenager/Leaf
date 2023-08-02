@@ -335,13 +335,13 @@ span{
   margin-top: 120px;
 }
 
-.data{
+.data-item{
   background-color: #A0C6F5;
   color: #F5F9FE;
   padding: 20px 25px;
   margin:10px;
 }
-.data:hover{
+.data-item:hover{
   background-color: #418EEB;
   padding: 20px 35px;
 }
@@ -360,4 +360,11 @@ span{
   background-color: #418EEB;
 }
 
+/* .environmental-recommendations-container{
+  display: flex;
+  width: 100vw;
+} */
 
+/* .environmental-chart{
+  width:33vw;
+} */
