@@ -212,7 +212,7 @@ main{
 .spending-header{
   color: #418EEB;
   font-size: 3rem;  
-  margin:80px 30px 90px;
+  margin:150px 30px 110px;
 }
 
 .tab-button{
@@ -261,7 +261,12 @@ main{
 .marketing-header{
   color: #418EEB;
   font-size: 3rem;  
-  margin:80px 30px 90px;
+  margin:150px 30px 110px;
+}
+
+.marketing-input-header{
+  color: #A0C6F5;
+  margin-left:10px;
 }
 
 .marketing-tab{
@@ -315,13 +320,12 @@ span{
 .bar-chart-grid{
   margin-top:80px;
   display:flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
 .chart{
-  height:700px;
+  height:100%;
   width:33vw;
 }
 

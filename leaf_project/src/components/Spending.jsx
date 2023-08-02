@@ -119,7 +119,7 @@ export default function Spending(){
         }
         setTimeout(postSpendingData, 500)
         setUserData({
-            labels: splicedKeys,
+            labels: ['items sold','cogs','total shipping expense','number in inventory','cost of using inventory','cost of order picking','safety stock','marketing cost','outstanding payments to suppliers','outstanding payments from customers','revenue','average lead time in days','number of freight bills','number of error free freight bills','gross profit from item'],
             datasets: [
                 {
                     data: newSpendingInfoArray.map(data=>parseFloat(data)),
@@ -582,13 +582,15 @@ export default function Spending(){
                     <div className='chart'>
                         <PieChart chartData={EOQData} />
                     </div>
-                    <div className='chart'>
+                    <div className='chart bar-chart'>
                         <BarChart chartData={CCCData} />
                     </div>
-                    <div className='chart'>
+                    <div className='chart bar-chart'>
                         <BarChart chartData={DSIData} />
                     </div>
-                    <div className='chart'>
+                </div>
+                <div className="bar-chart-grid">
+                    <div className='chart bar-chart'>
                         <BarChart chartData={DPOData} />
                     </div>
                     <div className='chart'>

@@ -3,6 +3,9 @@ import UserContext from "../UserContext"
 import { useState, useEffect, useContext } from 'react'
 import screenshot from '../images/website.png'
 import axios from 'axios'
+import BarChart from "./BarChart"
+import LineChart from "./LineChart"
+import PieChart from "./PieChart"
 
 export default function Marketing(){
     
@@ -30,6 +33,19 @@ export default function Marketing(){
     const [url, setUrl] = useState('')
     const [info, setInfo] = useState('')
     const [imagePath, setImagePath] = useState('https://images.pexels.com/photos/17463091/pexels-photo-17463091/free-photo-of-lightning-bolt-in-the-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
+    const [userData, setUserData] = useState({
+        labels: ['1', '2', '3'],
+        datasets: [
+            {
+                data: marketingInfo.map(data=>parseFloat(data)),
+                backgroundColor: [
+                    '#A0C6F5'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
     
     // onChange Input Functions
 
@@ -58,6 +74,8 @@ export default function Marketing(){
             }
         }
         setTimeout(postMarketingData, 500)
+
+
 
         const getScrapedData = async() => {
             const response = await axios.post(`http://localhost:4000/getinfo`, {url: url})
@@ -268,13 +286,13 @@ export default function Marketing(){
             >
                 <div className="data-inputs">
                     <div className="data-input-column">
-                        <h1>SEO Data</h1>
+                        <h1 className='marketing-input-header'>SEO Data</h1>
                         <div className="data-input-container">
                             <input className='data-input' type="text" id="website"onChange={handleWebsiteChange} placeholder="Website URL"/>
                         </div>
                     </div>
                     <div className="data-input-column">
-                        <h1>Social Media Data</h1>
+                        <h1 className='marketing-input-header'>Social Media Data</h1>
                         <div className="data-input-container">
                             <input className='data-input' type="text" id="average_target_age" onChange={handleChange} placeholder="Average Customer Age or Target Age"/>
                         </div>
@@ -306,7 +324,6 @@ export default function Marketing(){
                         <h4>Website: {marketingInfo.website}</h4>
                         <h2>{info}</h2>
                         <img src={imagePath} alt="" />
-                        <h1>poo</h1>
                     </div>
                     <div className="displayed-data-right">
                     </div>
@@ -321,11 +338,11 @@ export default function Marketing(){
                 <h1>SEO Recommendations</h1>
             </div>
             <div className="displayed-recommendations" style={{display: socialMediaRecommendationsDisplay}}>
-                <h1>Social Media Recommendations</h1>
-                <p>Based on your current or target customer demographics, we recommend to prioritize marketing on {TotalRec}, however the more social media sites you can market on the better.</p>
-                <p>We would also recommend, based on your industry, that you also focus on {IndustryRec1}, {IndustryRec2}, and {IndustryRec3}.</p>
-                <p>We also recommend that you utilize social media, especially the sites mentioned above, to educate your audience, produce different kinds of content, look for micro-influencers, as well as try stories and live streaming.</p>
-                <p>Also look for businesses similar to yours that are popular and see what they are posting. This can be very important for social media growth.</p>
+                <h1 className='tab-header'>Social Media Recommendations</h1>
+                <p className='recommendation'>Based on your current or target customer demographics, we recommend to prioritize marketing on {TotalRec}, however the more social media sites you can market on the better.</p>
+                <p className='recommendation'>We would also recommend, based on your industry, that you also focus on {IndustryRec1}, {IndustryRec2}, and {IndustryRec3}.</p>
+                <p className='recommendation'>We also recommend that you utilize social media, especially the sites mentioned above, to educate your audience, produce different kinds of content, look for micro-influencers, as well as try stories and live streaming.</p>
+                <p className='recommendation'>Also look for businesses similar to yours that are popular and see what they are posting. This can be very important for social media growth.</p>
             </div>
         </div>
     )
