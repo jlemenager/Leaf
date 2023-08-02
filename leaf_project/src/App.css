@@ -362,6 +362,10 @@ main{
 span{
   color: #418EEB;
 }
+
+.h1-list:hover{
+  color:#F5F9FE;
+}
 /* Charts */
 
 
@@ -426,3 +430,6 @@ span{
   margin-left:10px;
 }
 
+.displayed-data-left img{
+  margin-left: 20vw;
+}

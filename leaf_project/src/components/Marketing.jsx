@@ -40,7 +40,7 @@ export default function Marketing(){
     let newMarketingInfoKeys = []
     const [marketingInfoArray, setMarketingInfoArray] = useState(Object.values(marketingInfo))
     const [userData, setUserData] = useState({
-        labels: ['target demographic','percent women'],
+        labels: ['target age','percent women'],
         datasets: [
             {
                 data: marketingInfoArray.map(data=>parseFloat(data)),
@@ -82,13 +82,12 @@ export default function Marketing(){
         setTimeout(postMarketingData, 500)
         // newMarketingInfoArray = marketingInfoArray.pop()
         setUserData({
-            labels: ['target demographic','percent women'],
+            labels: ['target age','percent women'],
             datasets: [
                 {
                     data: newMarketingInfoArray.map(data=>parseFloat(data)),
                     backgroundColor: [
-                        '#A0C6F5',
-                        '#418EEB'
+                        '#A0C6F5'
                     ],
                     borderColor:'#418EEB',
                     borderWidth: 2
@@ -354,9 +353,7 @@ export default function Marketing(){
                 <div className='displayed-data-container'>
                     <div className="displayed-data-left">
                         <h1 className="tab-header">Website: <span>{marketingInfo.website}</span></h1>
-                        <h2 className="SEO-analysis">{info}</h2>
-                        <h2 className="SEO-analysis">{h1count}</h2>
-                        <h2 className="SEO-analysis">{keywordAnalysis}</h2>
+                        <h2 className="SEO-analysis">All Front-Page H1s: <span className='h1-list'>{info}</span></h2>
                         <img src={imagePath} alt="" />
                     </div>
                     <div className="displayed-data-right">
@@ -366,10 +363,13 @@ export default function Marketing(){
             <div className="displayed-analysis" 
             style={{display: SEOAnalysisDisplay}}
             >
-                <h4>SEO Analysis </h4>
+                <h1 className="tab-header">SEO Analysis </h1>
+                <h2 className="SEO-analysis">{h1count}</h2>
+                <h2 className="SEO-analysis">{keywordAnalysis}</h2>
             </div>
             <div className="displayed-recommendations" style={{display: SEORecommendationsDisplay}}>
-                <h1>SEO Recommendations</h1>
+                <h1 className="tab-header">SEO Recommendations</h1>
+                <p className='recommendation'>Recommendations to come...</p>
             </div>
             <div className="displayed-recommendations" style={{display: socialMediaRecommendationsDisplay}}>
                 <h1 className='tab-header'>Social Media Recommendations</h1>
