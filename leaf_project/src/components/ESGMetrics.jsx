@@ -59,7 +59,7 @@ export default function ESGMetrics(){
         labels: ['electricity_from_locations','electricity_from_factories','average_employee_commute_in_miles','employee_count','average_business_trip_commute_in_miles','total_business_trips','total_shipments','average_shipment_vehicle_type','total_miles_shipped','total_water_consumption_in_gallons','pounds_of_plastic_used','pounds_of_cardboard_used','pounds_of_wood_used','pounds_of_paper_used','pounds_of_metal_used','pounds_of_styrofoam_used','pounds_of_tetrapaks_used','pounds_of_glass_used','pounds_of_aluminumfoil_used','pounds_of_petplastic_used','pounds_of_hdpeplastic_used','pounds_of_ldpeplastic_used','pounds_of_palmoil_used','pounds_of_soybeans_used','pounds_of_beef_used','pounds_of_rubber_used','pounds_of_cocoa_used','other_material_waste_in_pounds','other_food_waste_in_pounds'],
         datasets: [
             {
-                data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
+                data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],
                 backgroundColor: [
                     '#418EEB',
                     '#A0C6F5',
@@ -74,52 +74,24 @@ export default function ESGMetrics(){
     const handleChange = (event) => {
         console.log(businessInfo.id)
         setGHGAssessmentInfo({...ghgAssessmentInfo, [event.target.id]: event.target.value})
+        setGHGAssessmentInfoArray(Object.values(ghgAssessmentInfo))
     }
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        console.log(ghgAssessmentInfo)
-        const postGHGAssessmentData = async() => {
-            try{
-                const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/ghgassessmentdata/`, ghgAssessmentInfo)  
-            } catch(e){
-                console.log(e.response.data)
-            }
-        }
-        setTimeout(postGHGAssessmentData, 500)
-
-        setUserData({
-            labels: ['electricity_from_locations','electricity_from_factories','average_employee_commute_in_miles','employee_count','average_business_trip_commute_in_miles','total_business_trips','total_shipments','average_shipment_vehicle_type','total_miles_shipped','total_water_consumption_in_gallons','pounds_of_plastic_used','pounds_of_cardboard_used','pounds_of_wood_used','pounds_of_paper_used','pounds_of_metal_used','pounds_of_styrofoam_used','pounds_of_tetrapaks_used','pounds_of_glass_used','pounds_of_aluminumfoil_used','pounds_of_petplastic_used','pounds_of_hdpeplastic_used','pounds_of_ldpeplastic_used','pounds_of_palmoil_used','pounds_of_soybeans_used','pounds_of_beef_used','pounds_of_rubber_used','pounds_of_cocoa_used','other_material_waste_in_pounds','other_food_waste_in_pounds'],
-            datasets: [
-                {
-                    data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
-                    backgroundColor: [
-                        '#418EEB',
-                        '#A0C6F5',
-                        'white'
-                    ],
-                    borderColor:'#418EEB',
-                    borderWidth: 2
-                }
-            ]    
-        })
-    }
-
-    useEffect(()=>{
-        const getGHGAssessmentInfo = async() => {
-            const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/ghgassessmentdata`)
-            setGHGAssessmentInfo(response.data[response.data.length-1])
-        }
-        const getBusinessInfo = async() => {
-            const response = await axios.get(`http://localhost:8000/business/`)
-                setBusinessInfo(response.data[response.data.length-1])
-                console.log(businessInfo)
-            if (businessInfo === response.data[response.data.length-1]){
-                getGHGAssessmentInfo()
-            }
-        }
-        getBusinessInfo()
-    },[])
+    // useEffect(()=>{
+    //     const getGHGAssessmentInfo = async() => {
+    //         const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/ghgassessmentdata`)
+    //         setGHGAssessmentInfo(response.data[response.data.length-1])
+    //     }
+    //     const getBusinessInfo = async() => {
+    //         const response = await axios.get(`http://localhost:8000/business/`)
+    //             setBusinessInfo(response.data[response.data.length-1])
+    //             console.log(businessInfo)
+    //         if (businessInfo === response.data[response.data.length-1]){
+    //             getGHGAssessmentInfo()
+    //         }
+    //     }
+    //     getBusinessInfo()
+    // },[])
 
     const changeInputDisplay = (event) => {
         if(inputDisplay === 'none'){
@@ -266,7 +238,7 @@ export default function ESGMetrics(){
         
         datasets: [
             {
-                data: ghgAssessmentInfoArray.map(data=>parseFloat(data)),
+                data: [],
                 backgroundColor: [
                     '#418EEB',
                     '#A0C6F5',
@@ -278,11 +250,13 @@ export default function ESGMetrics(){
         ]    
     })
 
+    
+
     const [electricityData, setElectricityData] = useState({
         labels: ['Total Pounds of CO2e Released from Electricity Used in Buildings and Factories','Average Total Pounds of CO2e Released from Electricity Used in Buildings and Factories'],
         datasets: [
             {
-                data: [ELECTRICITYCO2e, 2000000],
+                data: [parseFloat(ELECTRICITYCO2e), 2000000],
                 backgroundColor: [
                     '#418EEB',
                     '#A0C6F5'
@@ -297,7 +271,7 @@ export default function ESGMetrics(){
         labels: ['Total CO2e Released from Shipping','Average Total CO2e Released from Shipping'],
         datasets: [
             {
-                data: [SHIPMENTCO2e, 10000],
+                data: [parseFloat(SHIPMENTCO2e), 10000],
                 backgroundColor: [
                     '#418EEB',
                     '#A0C6F5'
@@ -312,7 +286,7 @@ export default function ESGMetrics(){
         labels: ['Pounds of CO2e Released from the Total Lifecycle of Each Material','Average Pounds of CO2e Released from the Total Lifecycle of Each Material'],
         datasets: [
             {
-                data: [MATERIALSCO2e, 2000000],
+                data: [parseFloat(MATERIALSCO2e), 2000000],
                 backgroundColor: [
                     '#418EEB',
                     '#A0C6F5'
@@ -322,6 +296,88 @@ export default function ESGMetrics(){
             }
         ]    
     })
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        console.log(ghgAssessmentInfo)
+        const postGHGAssessmentData = async() => {
+            try{
+                const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/ghgassessmentdata/`, ghgAssessmentInfo)  
+            } catch(e){
+                console.log(e.response.data)
+            }
+        }
+        setTimeout(postGHGAssessmentData, 500)
+        // newGHGAssessmentInfoKeys = Object.keys(ghgAssessmentInfo)
+        // console.log(newGHGAssessmentInfoKeys)
+        // let splicedKeys = newGHGAssessmentInfoKeys.splice(-29)
+        // console.log(splicedKeys)
+        newGHGAssessmentInfoArray = ghgAssessmentInfoArray.splice(3,ghgAssessmentInfoArray.length-1)
+        console.log(newGHGAssessmentInfoArray)
+        setAnalysisData({
+            labels: ['Total Pounds of CO2e Released from Electricity Used in Buildings and Factories','Total Pounds of CO2e Released from Travel','Pounds of CO2e is coming from in-house employees','Pounds of CO2e is coming from factory employees','Total CO2e Released from Shipping','Total Pounds of CO2e Released from Product Creation','Total Pounds of CO2e Released from Product Waste'],
+            // 'Pounds of CO2e Released from the Total Lifecycle of Each Material','Pounds of CO2e From Plastic','Pounds of CO2e From Cardboard','Pounds of CO2e From Wood','Pounds of CO2e From Paper','Pounds of CO2e From Metal','Pounds of CO2e From Styrofoam','Pounds of CO2e From Tetra Paks','Pounds of CO2e From Glass','Pounds of CO2e From Aluminum Foil','Pounds of CO2e From PET Plastic','Pounds of CO2e From HDPE Plastic','Pounds of CO2e From LDPE Plastic','Pounds of CO2e From Palm Oil','Pounds of CO2e From Soybeans','Pounds of CO2e From Beef','Pounds of CO2e From Rubber','Pounds of CO2e From Cocoa'
+            
+            datasets: [
+                {
+                    data: [parseFloat(ELECTRICITYCO2e), parseFloat(TRAVELCO2e), parseFloat(EmployeeTravelCO2e), parseFloat(WorkerTravelCO2e), parseFloat(SHIPMENTCO2e), parseFloat(MATERIALSCO2e), parseFloat(WASTECO2e)],
+                    backgroundColor: [
+                        '#418EEB',
+                        '#A0C6F5',
+                        'white'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+        
+
+        setMaterialData({
+            labels: ['Total Pounds of CO2e Released from Electricity Used in Buildings and Factories','Average Total Pounds of CO2e Released from Electricity Used in Buildings and Factories'],
+            datasets: [
+                {
+                    data: [parseFloat(ELECTRICITYCO2e), 2000000],
+                    backgroundColor: [
+                        '#418EEB',
+                        '#A0C6F5'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+
+        setShipmentData({
+            labels: ['Total CO2e Released from Shipping','Average Total CO2e Released from Shipping'],
+            datasets: [
+                {
+                    data: [parseFloat(SHIPMENTCO2e), 10000],
+                    backgroundColor: [
+                        '#418EEB',
+                        '#A0C6F5'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+
+        setMaterialData({
+            labels: ['Pounds of CO2e Released from the Total Lifecycle of Each Material','Average Pounds of CO2e Released from the Total Lifecycle of Each Material'],
+            datasets: [
+                {
+                    data: [parseFloat(MATERIALSCO2e), 2000000],
+                    backgroundColor: [
+                        '#418EEB',
+                        '#A0C6F5'
+                    ],
+                    borderColor:'#418EEB',
+                    borderWidth: 2
+                }
+            ]    
+        })
+    }
     
     return (
         <div className="marketing">
@@ -477,7 +533,7 @@ export default function ESGMetrics(){
             style={{display: GHGAssessmentDisplay}}
             >
                 <h1 className="tab-header">GHG Assessment </h1>
-                <PieChart chartData={analysisData}/>
+                <BarChart chartData={analysisData}/>
                 {/* <h4>Total Pounds of CO2e Released from Electricity Used in Buildings and Factories: {ELECTRICITYCO2e}</h4>
                 <h4>Total Pounds of CO2e Released from Travel: {TRAVELCO2e}</h4>
                 <h5>{EmployeeTravelCO2e} Pounds of CO2e is coming from in-house employees</h5>
