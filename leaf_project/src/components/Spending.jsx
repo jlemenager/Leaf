@@ -40,12 +40,10 @@ export default function Spending(){
     }
     // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
     const [spendingInfo, setSpendingInfo] = useState(spendingInitialState)
-    const [newSpendingInfoArray, setNewSpendingInfoArray] = useState([])
-    const [newSpendingInfoKeys, setNewSpendingInfoKeys] = useState([])
-    const [splicedKeys, setSplicedKeys] = useState([])
+    let newSpendingInfoArray = []
+    let newSpendingInfoKeys = []
 
     // Chart Data
-    const [renewedSpendingInfo, setRenewedSpendingInfo] = useState(null)
     const [spendingInfoArray, setSpendingInfoArray] = useState(Object.values(spendingInfo))
     const [userData, setUserData] = useState({
         labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
@@ -73,26 +71,38 @@ export default function Spending(){
     }
 
     // useEffect(()=> {
-    //     const getResponseAPI = async() => {
-    //         console.log(businessInfo)
-    //         console.log(spendingInfo)
-    //         const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata/`)
-    //         setSpendingInfo(response.data[0])
-    //         newSpendingInfoKeys = Object.keys(spendingInfo)
-    //         splicedKeys = newSpendingInfoKeys.splice(-15)
-    //         newSpendingInfoKeys = Object.values(spendingInfo)
-    //         newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)
+    //     if (userData !== {
+    //         labels: splicedKeys,
+    //         datasets: [
+    //             {
+    //                 data: newSpendingInfoArray.map(data=>parseFloat(data)),
+    //                 backgroundColor: [
+    //                     '#A0C6F5'
+    //                 ],
+    //                 borderColor:'#418EEB',
+    //                 borderWidth: 2
+    //             }
+    //         ]    
+    //     }){
+    //         const getResponseAPI = async() => {
+    //             console.log(businessInfo)
+    //             console.log(spendingInfo)
+    //             const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata/`)
+    //             setSpendingInfo(response.data[0])
+                
+    //         }
+    //         getResponseAPI()
+    //         handleSubmit()
     //     }
-    //     getResponseAPI()
     // }, [])
 
     // On Submit
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        setNewSpendingInfoKeys(Object.keys(spendingInfo))
-        setSplicedKeys(newSpendingInfoKeys.splice(-15))
-        setNewSpendingInfoArray(spendingInfoArray.splice(3,spendingInfoArray.length-1))
+        newSpendingInfoKeys = Object.keys(spendingInfo)
+        let splicedKeys = newSpendingInfoKeys.splice(-15)
+        newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)
         if ((parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) > 1){
             setABCRating('C')
         } else if (0< (parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) < 1){
