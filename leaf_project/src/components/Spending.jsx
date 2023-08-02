@@ -60,41 +60,9 @@ export default function Spending(){
     })
     
     const handleChange = (event) => {
-        // console.log(businessInfo)
         setSpendingInfo({...spendingInfo, [event.target.id]: event.target.value})
-        // console.log(Object.values(spendingInfo))
         setSpendingInfoArray(Object.values(spendingInfo))
-        
-        // for (let i = 0; i < spendingInfoArray.length; i++){
-        //     newSpendingInfoArray.push(parseFloat(spendingInfoArray[i]))
-        // }
     }
-
-    // useEffect(()=> {
-    //     if (userData !== {
-    //         labels: splicedKeys,
-    //         datasets: [
-    //             {
-    //                 data: newSpendingInfoArray.map(data=>parseFloat(data)),
-    //                 backgroundColor: [
-    //                     '#A0C6F5'
-    //                 ],
-    //                 borderColor:'#418EEB',
-    //                 borderWidth: 2
-    //             }
-    //         ]    
-    //     }){
-    //         const getResponseAPI = async() => {
-    //             console.log(businessInfo)
-    //             console.log(spendingInfo)
-    //             const response = await axios.get(`http://localhost:8000/business/${businessInfo.id}/spendingdata/`)
-    //             setSpendingInfo(response.data[0])
-                
-    //         }
-    //         getResponseAPI()
-    //         handleSubmit()
-    //     }
-    // }, [])
 
     // On Submit
 
@@ -490,8 +458,6 @@ export default function Spending(){
             <div className="data" 
             style={{display: inputDisplay}}
             >
-                {/* <button>Total Items</button>
-                <button>Add Items</button> */}
                 <div className="data-inputs">
                     <div className="data-input-column">
                         <div className="data-input-container">
@@ -511,8 +477,6 @@ export default function Spending(){
                         </div>
                         <div className="data-input-container">
                             <input className='data-input' type="text" id="cost_of_using_inventory" onChange={handleChange} placeholder="Total Cost of Renting Inventory for These Items This Year"/>
-                            {/* <span>OR</span>
-                            <input className='data-input' type="text" id="cost_of_using_inventory" onChange={handleChange} placeholder="Total Cost of Maintaining Inventory for These Items This Year"/> */}
                         </div>
                         <div className="data-input-container">
                             <input className='data-input' type="text" id="cost_of_order_picking" onChange={handleChange} placeholder="Order Picking Cost"/>
@@ -603,15 +567,6 @@ export default function Spending(){
                     </div>
                 </div>
                 <BarChart chartData={analysisData} />
-                {/* <h4>Economic Order Quantity: {EOQ}</h4>
-                <h4>Cash Conversion Cycle: {CCC}</h4>
-                <h4>Days Sales of Inventory: {DSI}</h4>
-                <h4>Days Payable Outstanding: {DPO}</h4>
-                <h4>Days Sales Outstanding: {DSO}</h4>
-                <h4>Inventory / Sales Ratio: {ISR}</h4>
-                <h4>ABC Analysis: {ABC} and is therefore a/an {ABCRating} item</h4>
-                <h4>Reorder Point: {ROP}</h4>
-                <h4>Freight Bill Accuracy: {FBA}</h4>  */}
             </div>
             <div className="displayed-recommendations" style={{display: recommendationsDisplay}}>
                 <h1 className='tab-header'>Recommendations</h1>

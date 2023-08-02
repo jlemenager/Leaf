@@ -52,11 +52,6 @@ background-color: #F5F9FE;
 
 /* Hero Section */
 
-main{
-  /* background-image: url('https://images.pexels.com/photos/3599566/pexels-photo-3599566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); */
-  /* ('images/main-background.jpg'); */
-}
-
 .hero{
   padding:200px 30px 50vh;
 }
@@ -415,15 +410,6 @@ span{
   padding:40px 20px;
   background-color: #418EEB;
 }
-
-/* .environmental-recommendations-container{
-  display: flex;
-  width: 100vw;
-} */
-
-/* .environmental-chart{
-  width:33vw;
-} */
 
 .esg-input-header{
   color: #A0C6F5;

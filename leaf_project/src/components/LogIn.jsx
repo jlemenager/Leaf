@@ -10,9 +10,6 @@ export default function LogIn(){
     const { businessInfo, setBusinessInfo } = useContext(UserContext)
     const { Response, setResponse } = useContext(UserContext)
     const [formState, setFormState] = useState('')
-    // const [nameFormState, setNameFormState] = useState('')
-    // const [usernameFormState, setUsernameFormState] = useState('')
-    // const [passwordFormState, setPasswordFormState] = useState('')
 
     const handleChange = (event) => {
         setFormState({...formState, [event.target.id]: event.target.value})
@@ -44,14 +41,11 @@ export default function LogIn(){
                 setBusinessInfo(response.data[i])
             }
         }
-        // setBusinessInfo({...businessInfo, business_id: businessInfo.id})
         const businessInfoAsString = JSON.stringify(response.data)
         console.log(response.data)
         localStorage.setItem('businessInfo', businessInfoAsString)
         console.log(localStorage.getItem('businessInfo'))
         //thanks to help from chatGPT for this localStorage fix
-        // console.log(response.data)
-        // setBusinessInfo({...businessInfo, [id]: business_url.splice(31,34)})
     }
                    
     return (
@@ -74,9 +68,10 @@ export default function LogIn(){
                     </div>
                 </div>
                 <button className='user-submit-button' onClick={handleSubmit}>Log In</button>
-                {/* <Link className='user-submit-link' to='/dashboard'></Link>  */}
             </div>
             <IntroFooter />
         </div>
     )
 }
+
+//thanks to chatgpt and various websites for a lot of the data around how to calculate spending, marketing, and environmental data

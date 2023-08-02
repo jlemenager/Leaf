@@ -18,14 +18,11 @@ export default function SignUp(){
         const response = await axios.post('http://localhost:8000/business/', businessInfo)
         setBusinessInfo(response.data)
         console.log(businessInfo)
-        // setTimeout(console.log(response.data),500)
         const businessInfoAsString = JSON.stringify(response.data)
         localStorage.setItem('businessInfo', businessInfoAsString)
         console.log(businessInfo)
         console.log(localStorage.getItem('businessInfo'))
         //thanks to help from chatGPT for this localStorage fix
-        // console.log(response.data)
-        // setBusinessInfo({...businessInfo, [id]: business_url.splice(31,34)})
     }
 
     return (
@@ -48,7 +45,6 @@ export default function SignUp(){
                     </div>
                 </div>
                 <button className='user-submit-button' onClick={handleSubmit}>Sign Up</button>
-                {/* <Link className='user-submit-link' to='/dashboard'></Link>  */}
             </div>
             <IntroFooter />
         </div>
