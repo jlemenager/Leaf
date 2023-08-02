@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import UserContext from "../UserContext"
 import { useState, useEffect, useContext } from 'react'
-import screenshot from '../images/website.png'
+// import screenshot from '../images/website.png'
 import axios from 'axios'
 import BarChart from "./BarChart"
 import LineChart from "./LineChart"

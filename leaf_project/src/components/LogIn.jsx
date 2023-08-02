@@ -74,4 +74,4 @@ export default function LogIn(){
     )
 }
 
-//thanks to chatgpt and various websites for a lot of the data around how to calculate spending, marketing, and environmental data
+//thanks to chatgpt, bard, and various websites for a lot of the data around how to calculate spending, marketing, and environmental data
