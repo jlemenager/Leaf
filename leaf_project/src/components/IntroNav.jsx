@@ -11,8 +11,8 @@ export default function IntroNav(){
                 </div>
             </Link>
             <div className="links">
-                <Link className='link' to='/login'>Log In</Link>
-                <Link className='link' to='/signup'>Sign Up</Link>
+                <Link className='link' to='/dashboard/login'>Log In</Link>
+                <Link className='link' to='/dashboard/signup'>Sign Up</Link>
             </div>
         </nav>
     )

@@ -43,3 +43,5 @@ app.post('/getinfo', async(req,res) =>{
 app.listen(PORT, () => {
     console.log(`Listening at port ${PORT}`)
 })
+
+//thanks to chatgpt and puppeteers documentation, youtube videos etc for this
