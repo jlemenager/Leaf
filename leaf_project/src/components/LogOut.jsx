@@ -32,13 +32,13 @@ export default function LogOut(){
     const handleSubmit = async(e) => {
         e.preventDefault()
         // setBusinessInfo({...businessInfo, is_logged_in: false})
-        const response = await axios.put(`http://localhost:8000/business/${businessInfo.id}`, {...businessInfo, is_logged_in: false})
+        const response = await axios.put(`https://leaf-database-production.up.railway.app/business/${businessInfo.id}`, {...businessInfo, is_logged_in: false})
         console.log(response)
 
     }
 
     const handleDelete = async() => {
-        const response = await axios.delete(`http://localhost:8000/business/${businessInfo.id}`)
+        const response = await axios.delete(`https://leaf-database-production.up.railway.app/business/${businessInfo.id}`)
     }
         // setBusinessInfo({...businessInfo, business_id: businessInfo.id})
         // const businessInfoAsString = JSON.stringify(response.data)

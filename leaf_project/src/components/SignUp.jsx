@@ -15,7 +15,7 @@ export default function SignUp(){
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        const response = await axios.post('http://localhost:8000/business/', businessInfo)
+        const response = await axios.post('https://leaf-database-production.up.railway.app/business/', businessInfo)
         setBusinessInfo(response.data)
         console.log(businessInfo)
         const businessInfoAsString = JSON.stringify(response.data)

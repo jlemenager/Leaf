@@ -250,8 +250,6 @@ export default function ESGMetrics(){
         ]    
     })
 
-    
-
     const [electricityData, setElectricityData] = useState({
         labels: ['Total Pounds of CO2e Released from Electricity Used in Buildings and Factories','Average Total Pounds of CO2e Released from Electricity Used in Buildings and Factories'],
         datasets: [
@@ -302,7 +300,7 @@ export default function ESGMetrics(){
         console.log(ghgAssessmentInfo)
         const postGHGAssessmentData = async() => {
             try{
-                const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/ghgassessmentdata/`, ghgAssessmentInfo)  
+                const response2 = await axios.post(`https://leaf-database-production.up.railway.app/business/${businessInfo.id}/ghgassessmentdata/`, ghgAssessmentInfo)  
             } catch(e){
                 console.log(e.response.data)
             }

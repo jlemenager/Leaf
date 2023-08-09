@@ -7,11 +7,12 @@ import WebDesign from "./WebDesign";
 import ESGMetrics from "./ESGMetrics";
 import LogIn from "./LogIn";
 import LogOut from './LogOut';
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserContext from "../UserContext";
 import SignUp from "./SignUp";
 import SEO from "./SEO";
 import SocialMedia from './SocialMedia';
+import axios from 'axios'
 
 export default function Main(){
     //     const businessInitialState = {
@@ -28,9 +29,25 @@ export default function Main(){
     let businessInitialState = businessInfoFromStorage ? JSON.parse(businessInfoFromStorage): {}
     const [businessInfo, setBusinessInfo] = useState(businessInitialState)
 
+// Spending Info
+    const [spendingInfo, setSpendingInfo] = useState([])
+    // const [spendingInfoArray, setSpendingInfoArray] = useState([])
+    // const [newSpendingInfoArray, setNewSpendingInfoArray] = useState([])
+
+    useEffect(()=>{
+        const getSpendingInfoAPI = async() => {
+            const response = await axios.get(`https://leaf-database-production.up.railway.app/business/${businessInfo.id}/spendingdata/`)
+            setSpendingInfo(response.data)
+            console.log(spendingInfo)
+            // setSpendingInfoArray(Object.values(spendingInfo))
+            // setNewSpendingInfoArray(spendingInfoArray.splice(3,spendingInfoArray.length-1))
+        }
+        getSpendingInfoAPI()
+    },[])
+
     return(
         <div>
-            <UserContext.Provider value={{ businessInfo,setBusinessInfo }}>
+            <UserContext.Provider value={{ businessInfo,setBusinessInfo,spendingInfo, setSpendingInfo }}>
                 <Nav />
                 <Routes>
                     <Route path='/' element={<Dashboard />}/>

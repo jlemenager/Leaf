@@ -33,18 +33,16 @@ export default function LogIn(){
     const handleSubmit = async(e) => {
         e.preventDefault()
         console.log('working')
-        const response = await axios.get('http://localhost:8000/business/')
+        const response = await axios.get('https://leaf-database-production.up.railway.app/business/')
         // let is_logged_in;
         for (let i = 0; i < response.data.length; i++){
             if (response.data[i].business_name == formState.business_name){
-                const response2 = await axios.put(`http://localhost:8000/business/${i}`, {...businessInfo, is_logged_in: true})
+                const response2 = await axios.put(`https://leaf-database-production.up.railway.app/business/${i}`, {...businessInfo, is_logged_in: true})
                 setBusinessInfo(response.data[i])
+                const businessInfoAsString = JSON.stringify(response.data[i])
+                localStorage.setItem('businessInfo', businessInfoAsString)
             }
         }
-        const businessInfoAsString = JSON.stringify(response.data)
-        console.log(response.data)
-        localStorage.setItem('businessInfo', businessInfoAsString)
-        console.log(localStorage.getItem('businessInfo'))
         //thanks to help from chatGPT for this localStorage fix
     }
                    

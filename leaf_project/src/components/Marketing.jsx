@@ -169,7 +169,7 @@ export default function Marketing(){
         
         const postMarketingData = async() => {
             try{
-                const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/marketingdata/`, marketingInfo)  
+                const response2 = await axios.post(`https://leaf-database-production.up.railway.app/business/${businessInfo.id}/marketingdata/`, marketingInfo)  
             } catch(e){
                 console.log(e.response.data)
             }
@@ -191,7 +191,7 @@ export default function Marketing(){
         })
         
         const getScrapedData = async() => {
-            const response = await axios.post(`http://localhost:4000/getinfo`, {url: url})
+            const response = await axios.post(`http://leaf-scraper-production.up.railway.app/getinfo/`, {url: url})
             setInfo(JSON.stringify(response.data))
             if(info.length >= 5){
                 setH1Count('Great job! You are using over 4 h1s!')
@@ -360,8 +360,6 @@ export default function Marketing(){
             } else if (marketingInfo.industry_rec === 'Restaurants' && info.includes('mexican restaurants' || 'italian restaurants' || 'steakhouse' || 'diner' || 'seafood restaurants' || 'vegan restaurants' || 'breakfast restaurants' || 'restaurant games' || 'places to eat' || 'seafood restaurants near me' || 'food around me' || 'steakhouse near me' || 'restaurant week' || 'greek restaurant')){
                 setKeywordAnalysis("You used at least one action-oriented keyword in your h1s, creating a call to action! That should boost your user experience.")
             } else if (marketingInfo.industry_rec === 'Retail' && info.includes('retailmenot' || 'coupons' || 'retail me not' || 'retina' || 'voucher codes' || 'promo code' || 'retailer' || 'retahilas' || 'retail jobs' || 'retail link' || 'retail stores' || 'retail management' || 'what is retail' || 'retail news' || 'retail shops' || 'retail sales' || 'retail industry' || 'retail marketing' || 'retailnews' || 'retail comic' || 'retail business' || 'inretail' || 'retail manager' || 'retail company' || 'retail trade')){
-                setKeywordAnalysis("You used at least one action-oriented keyword in your h1s, creating a call to action! That should boost your user experience.")
-            }  else if (marketingInfo.industry_rec === 'Web Design' && info.includes('web de' || 'website' || 'logo design' || 'graphic design' || 'website design' || 'website builder' || 'website templates' || 'web development' || 'graphic designer' || 'web page' || 'brochure design' || 'web designer' || 'webdesign' || 'web developer' || 'ecommerce website' || 'create a website' || 'logo designer' || 'retail marketing' || 'retailnews' || 'retail comic' || 'retail business' || 'inretail' || 'free website templates' || 'web design company' || 'website creator' || 'website creator' || 'design logo' || 'website designer' || 'responsive web design' || 'create website' || 'criar site')){
                 setKeywordAnalysis("You used at least one action-oriented keyword in your h1s, creating a call to action! That should boost your user experience.")
             } else {
                 setKeywordAnalysis("You did not include a call to action word in any of your h1s.")
@@ -595,7 +593,13 @@ export default function Marketing(){
                                 <option value="Air Travel">Air Travel</option>
                                 <option value="Ecommerce and Shopping">Ecommerce and Shopping</option>
                                 <option value="Fashion">Fashion</option>
-                                <option value="B2C">B2C</option>
+                                <option value="Insurance">Insurance</option>
+                                <option value="Banking, Credit, and Lending">Banking, Credit, and Lending</option>
+                                <option value="Consumer Electronics">Consumer Electronics</option>
+                                <option value="Health">Health</option>
+                                <option value="Restaurants">Restaurants</option>
+                                <option value="Pharmaceuticals">Pharmaceuticals</option>
+                                <option value="Logistics">Logistics</option>
                             </select>
                         </div>
                     </div>

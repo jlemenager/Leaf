@@ -9,10 +9,8 @@ export default function Spending(){
 
     // Variables
 
-    const { businessInfo, setBusinessInfo } = useContext(UserContext)
-    const [Response, setResponse] = useState(null)
+    const { businessInfo, setBusinessInfo, spendingInfo, setSpendingInfo } = useContext(UserContext)
     const [ABCRating, setABCRating] = useState(null)
-    const [display, setDisplay] = useState('none')
     const [inputDisplay, setInputDisplay] = useState('none')
     const [dataDisplay, setDataDisplay] = useState('none')
     const [analysisDisplay, setAnalysisDisplay] = useState('none')
@@ -39,17 +37,149 @@ export default function Spending(){
         gross_profit_from_item:''
     }
     // let spendingInfoFromStorage = JSON.parse(localStorage.getItem('spendingInfo'))
-    const [spendingInfo, setSpendingInfo] = useState(spendingInitialState)
-    let newSpendingInfoArray = []
-    let newSpendingInfoKeys = []
+    const [formState, setFormState] = useState(spendingInitialState)
+     
 
-    // Chart Data
-    const [spendingInfoArray, setSpendingInfoArray] = useState(Object.values(spendingInfo))
+    //HandleChange
+
+    const handleChange = (event) => {
+        setFormState({...formState, [event.target.id]: event.target.value})
+    }
+
+    // Change Tabs
+
+    const changeInputDisplay = (event) => {
+        if(inputDisplay === 'none'){
+            setInputDisplay('block')
+            setDataDisplay('none')
+            setAnalysisDisplay('none')
+            setRecommendationsDisplay('none')
+            for (let i = 0; i < 4; i++){
+                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+            }    
+            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
+        } else {
+            setInputDisplay('none')
+            setDataDisplay('none')
+            setAnalysisDisplay('none')
+            setRecommendationsDisplay('none')
+            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+        }
+    }
+    
+    const changeDataDisplay = (event) => {
+        if(dataDisplay === 'none'){
+            setDataDisplay('flex')
+            setInputDisplay('none')
+            setAnalysisDisplay('none')
+            setRecommendationsDisplay('none')
+            for (let i = 0; i < 4; i++){
+                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+            }    
+            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
+        } else {
+            setInputDisplay('none')
+            setDataDisplay('none')
+            setAnalysisDisplay('none')
+            setRecommendationsDisplay('none')
+            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+        }
+    }
+    const changeAnalysisDisplay = (event) => {
+        if(analysisDisplay === 'none'){
+            setAnalysisDisplay('block')
+            setDataDisplay('none')
+            setInputDisplay('none')
+            setRecommendationsDisplay('none')
+            for (let i = 0; i < 4; i++){
+                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+            }    
+            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
+        } else {
+            setInputDisplay('none')
+            setDataDisplay('none')
+            setAnalysisDisplay('none')
+            setRecommendationsDisplay('none')
+            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+        }
+    }
+
+    const changeRecommendationsDisplay = (event) => {
+        if(recommendationsDisplay === 'none'){
+            setRecommendationsDisplay('block')
+            setAnalysisDisplay('none')
+            setDataDisplay('none')
+            setInputDisplay('none')
+            for (let i = 0; i < 4; i++){
+                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+            }    
+            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
+        } else {
+            setInputDisplay('none')
+            setDataDisplay('none')
+            setAnalysisDisplay('none')
+            setRecommendationsDisplay('none')
+            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
+        }
+    }
+
+    // Analysis
+
+    let EOQ = Math.sqrt((2*parseInt(spendingInfo[0].items_sold)*parseInt(spendingInfo[0].total_shipping_expense))/parseInt(spendingInfo[0].number_in_inventory))
+    let CCC = (parseInt(spendingInfo[0].number_in_inventory) / parseInt(spendingInfo[0].cogs)) + (parseInt(spendingInfo[0].outstanding_payments_from_customers)/ parseInt(spendingInfo[0].revenue)) - (parseInt(spendingInfo[0].outstanding_payments_to_suppliers) / parseInt(spendingInfo[0].cogs))
+    let DSI = parseInt(spendingInfo[0].number_in_inventory) / parseInt(spendingInfo[0].cogs)
+    let DPO = parseInt(spendingInfo[0].outstanding_payments_to_suppliers) / parseInt(spendingInfo[0].cogs)
+    let DSO = parseInt(spendingInfo[0].outstanding_payments_from_customers)/ parseInt(spendingInfo[0].revenue)
+    let ISR = parseInt(spendingInfo[0].number_in_inventory) / parseInt(spendingInfo[0].revenue)
+    let ABC = parseInt(spendingInfo[0].items_sold) / parseInt(spendingInfo[0].revenue)
+    let ROP = (parseInt(spendingInfo[0].items_sold) * parseInt(spendingInfo[0].average_lead_time_in_days))+ parseInt(spendingInfo[0].safety_stock)
+    let FBA = (parseInt(spendingInfo[0].number_of_freight_bills) - parseInt(spendingInfo[0].number_of_error_free_freight_bills)) / parseInt(spendingInfo[0].number_of_freight_bills)
+
+    // Recommendations
+
+    let DSIRec = ''
+    if (30 > DSI > 50){
+        DSIRec = 'Your Days of Sales Inventory is hitting around average relative to your competitors. To further improve upon this, make sure that your inventory is managed as efficiently as possible.'
+    } else if (DSI>70){
+        DSIRec = 'Your DSI is way too high compared to your competitors. To reduce this number, isolate the reason why. There could be a few reasons for this. If you are hitting your sales goals, then you are having inventory management issues and vice versa.'
+    } else {
+        DSIRec = 'Your DSI is way lower compared to your competitors. This is great in many ways, but make sure that you have enough safety stock so that there wont be any stockouts. Furthermore, it is more common for companies with a lower-than-average DSI to make lower-quality products. If that is an issue, definitely invest in improving the quality.'
+    }
+
+    let DPORec = ''
+    if (20 > DPO > 30){
+        DPORec = 'Your Days Payable Outstanding is hitting around average relative to your competitors. Its good to keep a balanced DPO as you want to maintain a good relationship with your partners without losing money in your cash flow.'
+    } else if (DPO>30){
+        DPORec = 'Your DPO is way too high compared to your competitors. While this is helping you keep money in your cash flow, it can damage supplier relations. If this money is absolutely needed, hold onto it, however, if its due to mismanagement, we recommend paying when expected to maintain supplier relations.'
+    } else {
+        DPORec = 'Your DPO is way lower compared to your competitors. This is great in many ways as you are forging a strong relationship with your suppliers. Keep it up, however if you need to hold onto the money for very important spending reasons, its okay to not pay it early and prioritize your revenue.'
+    }
+
+    let DSORec = ''
+    if (30 > DSO > 45){
+        DSORec = 'Your Days Sales Outstanding is hitting around average relative to your competitors. Make sure your sales allow you to have strong cashflow without pushing away future customers.'
+    } else if (DSO>45){
+        DSORec = 'Your Days Sales Outstanding is way too high compared to your competitors. You might consider creating more stringent guidelines for payment.'
+    } else {
+        DSORec = 'Your DSO is way lower compared to your competitors. This is great as you are increasing your cash flow! Keep going!'
+    }
+
+    let FBARec = ''
+    if (.80 > FBA > .90){
+        FBARec = 'Your Freight Bill Accuracy is okay. You might consider discussing improving this metric with your clients or, if they are unwilling, researching trucking companies to see if there are ones with higher accuracy that are just as cheap.'
+    } else if (FBA<.80){
+        FBARec = 'Your Freight Bill Accuracy is too low. We would suggest working with another freight company.'
+    } else {
+        FBARec = 'Your Freight Bill Accuracy is great! Stay with your freight company, they are certainly not losing you money due to errors'
+    }
+
+    //Charts
+
     const [userData, setUserData] = useState({
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+        labels: ['items sold','cogs','total shipping expense','number in inventory','cost of using inventory','cost of order picking','safety stock','marketing cost','outstanding payments to suppliers','outstanding payments from customers','revenue','average lead time in days','number of freight bills','number of error free freight bills','gross profit from item'],
         datasets: [
             {
-                data: spendingInfoArray.map(data=>parseFloat(data)),
+                data: [parseFloat(spendingInfo[spendingInfo.length-1].items_sold), parseFloat(spendingInfo[spendingInfo.length-1].cogs), parseFloat(spendingInfo[spendingInfo.length-1].total_shipping_expense), parseFloat(spendingInfo[spendingInfo.length-1].number_in_inventory), parseFloat(spendingInfo[spendingInfo.length-1].cost_of_using_inventory), parseFloat(spendingInfo[spendingInfo.length-1].cost_of_order_picking), parseFloat(spendingInfo[spendingInfo.length-1].safety_stock), parseFloat(spendingInfo[spendingInfo.length-1].marketing_cost), parseFloat(spendingInfo[spendingInfo.length-1].outstanding_payments_to_suppliers), parseFloat(spendingInfo[spendingInfo.length-1].outstanding_payments_from_customers), parseFloat(spendingInfo[spendingInfo.length-1].revenue), parseFloat(spendingInfo[spendingInfo.length-1].average_lead_time_in_days), parseFloat(spendingInfo[spendingInfo.length-1].number_of_freight_bills), parseFloat(spendingInfo[spendingInfo.length-1].number_of_error_free_freight_bills), parseFloat(spendingInfo[spendingInfo.length-1].gross_profit_from_item)],
                 backgroundColor: [
                     '#A0C6F5'
                 ],
@@ -58,41 +188,119 @@ export default function Spending(){
             }
         ]    
     })
-    
-    const handleChange = (event) => {
-        setSpendingInfo({...spendingInfo, [event.target.id]: event.target.value})
-        setSpendingInfoArray(Object.values(spendingInfo))
-    }
+    const [analysisData, setAnalysisData] = useState({
+        labels: ['Economic Order Quantity', 'Cash Conversion Cycle', 'Days Sales of Inventory', 'Days Payable Outstanding', 'Days Sales Outstanding', 'Inventory / Sales Ratio', 'ABC Analysis', 'Reorder Point', 'Freight Bill Accuracy'],
+        datasets: [
+            {
+                data: [EOQ,CCC,DSI,DPO,DSO,ISR,ABC,ROP,FBA],
+                backgroundColor: [
+                    '#A0C6F5'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+    const [EOQData, setEOQData] = useState({
+        labels: ['Economic Order Quantity', 'Average Economic Order Quantity'],
+        datasets: [
+            {
+                data: [EOQ, 40],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+    const [DSIData, setDSIData] = useState({
+        labels: ['Days of Sales Inventory', 'Average Days of Sales Inventory'],
+        datasets: [
+            {
+                data: [DSI, 40],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+    const [DSOData, setDSOData] = useState({
+        labels: ['Days Payable Outstanding', 'Average Days Payable Outstanding'],
+        datasets: [
+            {
+                data: [DPO, 25],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+    const [DPOData, setDPOData] = useState({
+        labels: ['Days Payable Outstanding', 'Average Days Payable Outstanding'],
+        datasets: [
+            {
+                data: [DPO, 25],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+    const [ISRData, setISRData] = useState({
+        labels: ['Income to Sales Ratio', 'Average Income to Sales Ratio'],
+        datasets: [
+            {
+                data: [ISR, 0.21],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
+    const [FBAData, setFBAData] = useState({
+        labels: ['Freight Bill Accuracy', 'Average Freight Bill Accuracy'],
+        datasets: [
+            {
+                data: [FBA, 0.85],
+                backgroundColor: [
+                    '#A0C6F5',
+                    '#418EEB'
+                ],
+                borderColor:'#418EEB',
+                borderWidth: 2
+            }
+        ]    
+    })
 
-    // On Submit
+    const setUpCharts = () => {
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        // localStorage.clear()
-        console.log('cleared localStorage')
-        newSpendingInfoKeys = Object.keys(spendingInfo)
-        let splicedKeys = newSpendingInfoKeys.splice(-15)
-        newSpendingInfoArray = spendingInfoArray.splice(3,spendingInfoArray.length-1)
         if ((parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) > 1){
             setABCRating('C')
         } else if (0< (parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)) < 1){
             setABCRating('B')
         } else {
             setABCRating('A')
-        }
-        const postSpendingData = async() => {
-            try{
-                const response2 = await axios.post(`http://localhost:8000/business/${businessInfo.id}/spendingdata/`, spendingInfo)  
-            } catch(e){
-                console.log(e.response.data)
-            }
-        }
-        setTimeout(postSpendingData, 500)
+        }      
+
         setUserData({
             labels: ['items sold','cogs','total shipping expense','number in inventory','cost of using inventory','cost of order picking','safety stock','marketing cost','outstanding payments to suppliers','outstanding payments from customers','revenue','average lead time in days','number of freight bills','number of error free freight bills','gross profit from item'],
             datasets: [
                 {
-                    data: newSpendingInfoArray.map(data=>parseFloat(data)),
+                    data: [parseFloat(spendingInfo[spendingInfo.length-1].items_sold), parseFloat(spendingInfo[spendingInfo.length-1].cogs), parseFloat(spendingInfo[spendingInfo.length-1].total_shipping_expense), parseFloat(spendingInfo[spendingInfo.length-1].number_in_inventory), parseFloat(spendingInfo[spendingInfo.length-1].cost_of_using_inventory), parseFloat(spendingInfo[spendingInfo.length-1].cost_of_order_picking), parseFloat(spendingInfo[spendingInfo.length-1].safety_stock), parseFloat(spendingInfo[spendingInfo.length-1].marketing_cost), parseFloat(spendingInfo[spendingInfo.length-1].outstanding_payments_to_suppliers), parseFloat(spendingInfo[spendingInfo.length-1].outstanding_payments_from_customers), parseFloat(spendingInfo[spendingInfo.length-1].revenue), parseFloat(spendingInfo[spendingInfo.length-1].average_lead_time_in_days), parseFloat(spendingInfo[spendingInfo.length-1].number_of_freight_bills), parseFloat(spendingInfo[spendingInfo.length-1].number_of_error_free_freight_bills), parseFloat(spendingInfo[spendingInfo.length-1].gross_profit_from_item)],
                     backgroundColor: [
                         '#A0C6F5'
                     ],
@@ -198,253 +406,39 @@ export default function Spending(){
                 }
             ]    
         })
+    }
+
+    // On Submit
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        // localStorage.clear()
+        // setSpendingInfo({...spendingInfo, business_id:businessInfo.id,
+        //     business_name:businessInfo.business_name})
+        // localStorage.setItem('spendingInfo', spendingInfo)
+
+        const postSpendingData = async() => {
+            try{
+                const response = await axios.post(`https://leaf-database-production.up.railway.app/business/${businessInfo.id}/spendingdata/`, formState) 
+                setSpendingInfo([...spendingInfo, response.data])
+                // setSpendingInfoArray(Object.values(spendingInfo))
+                // setNewSpendingInfoArray(spendingInfoArray.splice(3,spendingInfoArray.length-1))
+                setFormState(spendingInitialState)
+                // newSpendingInfoKeys = Object.keys(spendingInfo)
+                // let splicedKeys = newSpendingInfoKeys.splice(-15)
+            } catch(e){
+            console.log(e.response.data)
+            }
+        }
+        postSpendingData()
+        // console.log(spendingInfo)
+        // location.reload()
+        // newTemporarySpendingInfoKeys = Object.keys(temporarySpendingInfo)
+        // let temporarySplicedKeys = newTemporarySpendingInfoKeys.splice(-15)
+        // newTemporarySpendingInfoArray = temporarySpendingInfoArray.splice(3,temporarySpendingInfoArray.length-1)
+
         // console.log(spendingInfoArray)
     }
-
-    // Change Tabs
-
-    const changeInputDisplay = (event) => {
-        if(inputDisplay === 'none'){
-            setInputDisplay('block')
-            setDataDisplay('none')
-            setAnalysisDisplay('none')
-            setRecommendationsDisplay('none')
-            for (let i = 0; i < 4; i++){
-                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-            }    
-            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
-        } else {
-            setInputDisplay('none')
-            setDataDisplay('none')
-            setAnalysisDisplay('none')
-            setRecommendationsDisplay('none')
-            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-        }
-    }
-    
-    const changeDataDisplay = (event) => {
-        if(dataDisplay === 'none'){
-            setDataDisplay('flex')
-            setInputDisplay('none')
-            setAnalysisDisplay('none')
-            setRecommendationsDisplay('none')
-            for (let i = 0; i < 4; i++){
-                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-            }    
-            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
-        } else {
-            setInputDisplay('none')
-            setDataDisplay('none')
-            setAnalysisDisplay('none')
-            setRecommendationsDisplay('none')
-            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-        }
-    }
-    const changeAnalysisDisplay = (event) => {
-        if(analysisDisplay === 'none'){
-            setAnalysisDisplay('block')
-            setDataDisplay('none')
-            setInputDisplay('none')
-            setRecommendationsDisplay('none')
-            for (let i = 0; i < 4; i++){
-                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-            }    
-            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
-        } else {
-            setInputDisplay('none')
-            setDataDisplay('none')
-            setAnalysisDisplay('none')
-            setRecommendationsDisplay('none')
-            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-        }
-    }
-
-    const changeRecommendationsDisplay = (event) => {
-        if(recommendationsDisplay === 'none'){
-            setRecommendationsDisplay('block')
-            setAnalysisDisplay('none')
-            setDataDisplay('none')
-            setInputDisplay('none')
-            for (let i = 0; i < 4; i++){
-                document.querySelectorAll('.tab-button')[i].style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-            }    
-            event.target.style = 'background-color:#F5F9FE; border:3px solid #418EEB; border-style: none solid none solid; color: #418EEB;'
-        } else {
-            setInputDisplay('none')
-            setDataDisplay('none')
-            setAnalysisDisplay('none')
-            setRecommendationsDisplay('none')
-            event.target.style = 'width:25vw;font-size:1.2rem;background-color: #A0C6F5;color: #F5F9FE;border-radius: 1.625rem 1.625rem 0 0;border: 3px solid #418EEB;border-style: none solid none none;padding:15px 0;'
-        }
-    }
-
-    // Analysis
-    let EOQ = Math.sqrt((2*parseInt(spendingInfo.items_sold)*parseInt(spendingInfo.total_shipping_expense))/parseInt(spendingInfo.number_in_inventory))
-    let CCC = (parseInt(spendingInfo.number_in_inventory) / parseInt(spendingInfo.cogs)) + (parseInt(spendingInfo.outstanding_payments_from_customers)/ parseInt(spendingInfo.revenue)) - (parseInt(spendingInfo.outstanding_payments_to_suppliers) / parseInt(spendingInfo.cogs))
-    let DSI = parseInt(spendingInfo.number_in_inventory) / parseInt(spendingInfo.cogs)
-    // console.log(inputDisplay)
-    let DPO = parseInt(spendingInfo.outstanding_payments_to_suppliers) / parseInt(spendingInfo.cogs)
-    let DSO = parseInt(spendingInfo.outstanding_payments_from_customers)/ parseInt(spendingInfo.revenue)
-    let ISR = parseInt(spendingInfo.number_in_inventory) / parseInt(spendingInfo.revenue)
-    let ABC = parseInt(spendingInfo.items_sold) / parseInt(spendingInfo.revenue)
-    let ROP = (parseInt(spendingInfo.items_sold) * parseInt(spendingInfo.average_lead_time_in_days))+ parseInt(spendingInfo.safety_stock)
-    let FBA = (parseInt(spendingInfo.number_of_freight_bills) - parseInt(spendingInfo.number_of_error_free_freight_bills)) / parseInt(spendingInfo.number_of_freight_bills)
-
-    // Recommendations
-    let DSIRec = ''
-    if (30 > DSI > 50){
-        DSIRec = 'Your Days of Sales Inventory is hitting around average relative to your competitors. To further improve upon this, make sure that your inventory is managed as efficiently as possible.'
-    } else if (DSI>70){
-        DSIRec = 'Your DSI is way too high compared to your competitors. To reduce this number, isolate the reason why. There could be a few reasons for this. If you are hitting your sales goals, then you are having inventory management issues and vice versa.'
-    } else {
-        DSIRec = 'Your DSI is way lower compared to your competitors. This is great in many ways, but make sure that you have enough safety stock so that there wont be any stockouts. Furthermore, it is more common for companies with a lower-than-average DSI to make lower-quality products. If that is an issue, definitely invest in improving the quality.'
-    }
-
-    let DPORec = ''
-    if (20 > DPO > 30){
-        DPORec = 'Your Days Payable Outstanding is hitting around average relative to your competitors. Its good to keep a balanced DPO as you want to maintain a good relationship with your partners without losing money in your cash flow.'
-    } else if (DPO>30){
-        DPORec = 'Your DPO is way too high compared to your competitors. While this is helping you keep money in your cash flow, it can damage supplier relations. If this money is absolutely needed, hold onto it, however, if its due to mismanagement, we recommend paying when expected to maintain supplier relations.'
-    } else {
-        DPORec = 'Your DPO is way lower compared to your competitors. This is great in many ways as you are forging a strong relationship with your suppliers. Keep it up, however if you need to hold onto the money for very important spending reasons, its okay to not pay it early and prioritize your revenue.'
-    }
-
-    let DSORec = ''
-    if (30 > DSO > 45){
-        DSORec = 'Your Days Sales Outstanding is hitting around average relative to your competitors. Make sure your sales allow you to have strong cashflow without pushing away future customers.'
-    } else if (DSO>45){
-        DSORec = 'Your Days Sales Outstanding is way too high compared to your competitors. You might consider creating more stringent guidelines for payment.'
-    } else {
-        DSORec = 'Your DSO is way lower compared to your competitors. This is great as you are increasing your cash flow! Keep going!'
-    }
-
-    let FBARec = ''
-    if (.80 > FBA > .90){
-        FBARec = 'Your Freight Bill Accuracy is okay. You might consider discussing improving this metric with your clients or, if they are unwilling, researching trucking companies to see if there are ones with higher accuracy that are just as cheap.'
-    } else if (FBA<.80){
-        FBARec = 'Your Freight Bill Accuracy is too low. We would suggest working with another freight company.'
-    } else {
-        FBARec = 'Your Freight Bill Accuracy is great! Stay with your freight company, they are certainly not losing you money due to errors'
-    }
-
-    const [analysisData, setAnalysisData] = useState({
-        labels: ['Economic Order Quantity', 'Cash Conversion Cycle', 'Days Sales of Inventory', 'Days Payable Outstanding', 'Days Sales Outstanding', 'Inventory / Sales Ratio', 'ABC Analysis', 'Reorder Point', 'Freight Bill Accuracy'],
-        datasets: [
-            {
-                data: [EOQ, DSI, DSO, DPO, ISR, ABC, ROP, FBA],
-                backgroundColor: [
-                    '#A0C6F5'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
-
-    const [EOQData, setEOQData] = useState({
-        labels: ['Economic Order Quantity', 'Average Economic Order Quantity'],
-        datasets: [
-            {
-                data: [EOQ, 40],
-                backgroundColor: [
-                    '#A0C6F5',
-                    '#418EEB'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
-
-    const [CCCData, setCCCData] = useState({
-        labels: ['Cash Flow Coverage', "Average Cash Flow Coverage"],
-        datasets: [
-            {
-                data: [CCC, 52.5],
-                backgroundColor: [
-                    '#A0C6F5',
-                    '#418EEB'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
-
-    const [DSIData, setDSIData] = useState({
-        labels: ['Days of Sales Inventory', 'Average Days of Sales Inventory'],
-        datasets: [
-            {
-                data: [DSI, 40],
-                backgroundColor: [
-                    '#A0C6F5',
-                    '#418EEB'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
-
-    const [DPOData, setDPOData] = useState({
-        labels: ['Days Payable Outstanding', 'Average Days Payable Outstanding'],
-        datasets: [
-            {
-                data: [DPO, 25],
-                backgroundColor: [
-                    '#A0C6F5',
-                    '#418EEB'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
-
-    const [DSOData, setDSOData] = useState({
-        labels: ['Days Sales Outstanding', "Average Days Sales Outstanding"],
-        datasets: [
-            {
-                data: [DSO, 37.5],
-                backgroundColor: [
-                    '#A0C6F5',
-                    '#418EEB'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
-
-    const [ISRData, setISRData] = useState({
-        labels: ['Inventory to Sales Ratio', "Average Inventory to Sales Ratio"],
-        datasets: [
-            {
-                data: [ISR, 0.21],
-                backgroundColor: [
-                    '#A0C6F5',
-                    '#418EEB'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
-
-    const [FBAData, setFBAData] = useState({
-        labels: ['Freight Bill Accuracy', 'Average Freight Bill Accuracy'],
-        datasets: [
-            {
-                data: [FBA, 0.85],
-                backgroundColor: [
-                    '#A0C6F5',
-                    '#418EEB'
-                ],
-                borderColor:'#418EEB',
-                borderWidth: 2
-            }
-        ]    
-    })
 
     return (
         <div className="spending">
@@ -548,9 +542,9 @@ export default function Spending(){
                     <div className='chart'>
                         <PieChart chartData={EOQData} />
                     </div>
-                    <div className='chart bar-chart'>
+                    {/* <div className='chart bar-chart'>
                         <BarChart chartData={CCCData} />
-                    </div>
+                    </div> */}
                     <div className='chart bar-chart'>
                         <BarChart chartData={DSIData} />
                     </div>
